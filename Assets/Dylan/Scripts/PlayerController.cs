@@ -19,9 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 wallCheckSize = new Vector2(0.1f, 0.8f);
     [Space(5)]
     public float WallSlideSpeed = 2f;
-    public float WallClimbSpeed = 5f;
     public Vector2 WallJumpForce = new Vector2(12f, 14f);
-    public LayerMask WallLayer;
 
     [Header("--- CELESTE STAMINA SYSTEM ---")]
     public float MaxClimbStamina = 4f;
@@ -31,8 +29,21 @@ public class PlayerController : MonoBehaviour
     [Header("--- CELESTE DASH MECHANICS ---")]
     public float DashSpeed = 25f;
     public float DashTime = 0.15f;
+
     public float DashCooldown = 0.2f;
 
+    [Header("--- WALL JUMP TUNING ---")]
+    public float WallJumpLockTime = 0.15f; // how long horizontal input is ignored after a wall jump
+    private float wallJumpLockTimer = 0f;
+
+    [Header("--- COYOTE TIME & JUMP BUFFER ---")]
+    public float CoyoteTime = 0.1f;
+    public float JumpBufferTime = 0.1f;
+    private float coyoteTimer = 0f;
+    private float jumpBufferTimer = 0f;
+
+    [Header("--- ABILITY UNLOCKS ---")]
+    public bool HasDoubleJumpUnlocked = false;
     // --- PRIVATE INTERNAL STATES ---
     private Rigidbody2D rb;
     private float moveInput;
@@ -40,10 +51,14 @@ public class PlayerController : MonoBehaviour
 
     private bool IsFacingRight = true;
     private bool isGrounded = true;
+    private bool wasGrounded = false;
+    private bool wasGroundedStable = false;
     private bool isDoubleJump = false;
     private bool isTouchingWall;
     private bool isWallSliding;
     private bool isClimbing;
+    public float StaminaPercent => currentStamina / MaxClimbStamina;
+    public bool IsClimbing => isClimbing;
     private bool holdClimbInput;
     private bool isDashing;
     private bool canDash = true;
@@ -60,6 +75,7 @@ public class PlayerController : MonoBehaviour
         CheckWallStatus();
         DetermineMovementStates();
         HandleStaminaDecay();
+        HandleJumpBuffer(); // NEW
 
         if (!isDashing && !isClimbing)
         {
@@ -85,20 +101,29 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, GroundLayer);
 
-        if (isGrounded)
+        bool isGroundedStable = isGrounded && !isDashing; 
+
+        if (isGroundedStable && !wasGroundedStable) 
         {
             isDoubleJump = false;
             canDash = true;
-            currentStamina = MaxClimbStamina; // Full stamina refresh on ground touch
+            currentStamina = MaxClimbStamina;
             isExhausted = false;
         }
+
+        if (isGrounded)
+            coyoteTimer = CoyoteTime; 
+        else
+            coyoteTimer -= Time.deltaTime;
+
+        wasGroundedStable = isGroundedStable;
     }
 
     private void CheckWallStatus()
     {
         if (WallCheck != null)
         {
-            isTouchingWall = Physics2D.OverlapBox(WallCheck.position, wallCheckSize, 0f, WallLayer);
+            isTouchingWall = Physics2D.OverlapBox(WallCheck.position, wallCheckSize, 0f, GroundLayer);
         }
     }
 
@@ -135,14 +160,19 @@ public class PlayerController : MonoBehaviour
     {
         if (isClimbing)
         {
-            // Vertical movement up/down walls using raw Y input
-            rb.linearVelocity = new Vector2(0, fullMoveInput.y * WallClimbSpeed);
-            rb.gravityScale = 0f; // Freeze gravity completely while holding
+            rb.linearVelocity = Vector2.zero;
+            rb.gravityScale = 0f;
             return;
         }
 
-        // Correctly restore regular gravity when running, falling, or standard sliding
         rb.gravityScale = DefaultGravityScale;
+
+        if (wallJumpLockTimer > 0f)
+        {
+            wallJumpLockTimer -= Time.fixedDeltaTime;
+            return; // skip overwriting X velocity, let the wall jump force play out
+        }
+
         rb.linearVelocity = new Vector2(moveInput * Speed, rb.linearVelocity.y);
     }
 
@@ -168,32 +198,47 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed)
         {
-            // Priority 1: Grounded Jump
-            if (isGrounded)
+            jumpBufferTimer = JumpBufferTime;
+
+            // Wall jump still fires immediately — it doesn't need buffering/coyote,
+            // since it depends on isTouchingWall which is a direct, current check
+            if (!isGrounded && isTouchingWall)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
-                isDoubleJump = false;
-            }
-            // Priority 2: Wall Jump (Executes if touching a wall, even if sliding or grabbing)
-            // CRITICAL: This explicitly skips checking or consuming "isDoubleJump"!
-            else if (isTouchingWall && !isGrounded)
-            {
-                // Push away from the wall direction based on sprite facing target
                 int pushDirection = IsFacingRight ? -1 : 1;
                 rb.linearVelocity = new Vector2(pushDirection * WallJumpForce.x, WallJumpForce.y);
+                wallJumpLockTimer = WallJumpLockTime;
+                holdClimbInput = false;
 
-                // Flip player tracking instantly to face away from the wall they kicked off of
                 IsFacingRight = !IsFacingRight;
                 Vector3 localScale = transform.localScale;
                 localScale.x *= -1f;
                 transform.localScale = localScale;
+
+                jumpBufferTimer = 0f; 
             }
-            // Priority 3: Air Double Jump (Only works if completely out in the open air)
-            else if (!isGrounded && !isDoubleJump && !isTouchingWall)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
-                isDoubleJump = true;
-            }
+        }
+    }
+
+    private void HandleJumpBuffer()
+    {
+        if (jumpBufferTimer <= 0f) return;
+
+        jumpBufferTimer -= Time.deltaTime;
+
+        bool canGroundJump = isGrounded || coyoteTimer > 0f;
+
+        if (canGroundJump)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
+            isDoubleJump = false;
+            coyoteTimer = 0f;
+            jumpBufferTimer = 0f;
+        }
+        else if (!isGrounded && !isDoubleJump && !isTouchingWall && HasDoubleJumpUnlocked)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
+            isDoubleJump = true;
+            jumpBufferTimer = 0f;
         }
     }
 
@@ -238,15 +283,11 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = originalGravity;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y * 0.5f);
         isDashing = false;
-
         yield return new WaitForSeconds(DashCooldown);
     }
 
-    private void OnDrawGizmosSelected()
+    public void UnlockDoubleJump()
     {
-        Gizmos.color = Color.green;
-        if (GroundCheck != null) Gizmos.DrawWireCube(GroundCheck.position, groundCheckSize);
-        Gizmos.color = Color.blue;
-        if (WallCheck != null) Gizmos.DrawWireCube(WallCheck.position, wallCheckSize);
+        HasDoubleJumpUnlocked = true;
     }
 }

@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class Waypoint
 {
-    public Vector2 position; // ワールド位置 World position
-    public Vector3 eulerAngles;// 回転角度 Rotation angles
+    public Vector2 position; // ローカル位置 Local position
+    public Vector3 eulerAngles;// ローカル回転角度 Local rotation angles
 }
 
 public class Minecart : MonoBehaviour
@@ -19,21 +18,47 @@ public class Minecart : MonoBehaviour
 
     private int currentIndex = 0;   // 現在の目標ウェイポイントのインデックス Current target waypoint index
     private bool isMoving = false;   // 移動中かどうかのフラグ Flag indicating whether the minecart is moving
+    private Transform passenger = null;    // 乗っているプレイヤーを記憶する変数 Passenger memory variable
+
+    // ゲーム中に実際に使用するワールド座標のリスト List of absolute world coordinates used during gameplay
+    private List<Waypoint> worldWaypoints = new List<Waypoint>();
+
+    void Start()
+    {
+        // ゲーム開始の瞬間に、ローカル座標をワールド座標に変換して固定する
+        foreach (var wp in waypoints)
+        {
+            Waypoint absoluteWp = new Waypoint();
+            absoluteWp.position = transform.TransformPoint(wp.position);
+            absoluteWp.eulerAngles = (transform.rotation * Quaternion.Euler(wp.eulerAngles)).eulerAngles;
+            worldWaypoints.Add(absoluteWp);
+        }
+    }
 
     void Update()
     {
-        // ウェイポイントが存在しない場合や移動が無効な場合は処理をスキップ
-        if (!isMoving || waypoints.Count == 0 || currentIndex >= waypoints.Count) return;
+        // ウェイポイントが存在しない場合や移動が無効な場合はスキップ
+        if (!isMoving || worldWaypoints.Count == 0 || currentIndex >= worldWaypoints.Count) return;
+
+        // 移動する前の位置を記憶
+        Vector3 previousPosition = transform.position;
 
         // 現在の目標ポイントを取得
-        Waypoint target = waypoints[currentIndex];
+        Waypoint target = worldWaypoints[currentIndex];
 
-        // 常に同じ速度で目標ポイントへ向かって移動（ワールド座標として扱う）
+        // 常に同じ速度で目標ポイントへ向かって移動
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         // 目標の角度へ向かってトロッコを回転させる処理
         Quaternion targetRotation = Quaternion.Euler(target.eulerAngles);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // トロッコが動いただけプレイヤーに足す
+        if (passenger != null)
+        {
+            Vector3 deltaPosition = transform.position - previousPosition;
+            passenger.position += deltaPosition;
+        }
 
         // 目標ポイントにほぼ到達したら、次のポイントへ切り替え
         if (Vector2.Distance(transform.position, target.position) < 0.05f)
@@ -41,14 +66,15 @@ public class Minecart : MonoBehaviour
             currentIndex++;
         }
     }
+
     // プレイヤーがトロッコに乗った時の処理
     // When the player gets on the minecart
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // プレイヤーをトロッコの子オブジェクトにして一緒に動かす
-            collision.transform.SetParent(transform);
+            // プレイヤーを子オブジェクトにせず、変数として記憶する
+            passenger = collision.transform;
 
             // トロッコを発車させる
             isMoving = true;
@@ -64,8 +90,11 @@ public class Minecart : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 親子関係を解除してプレイヤーを独立させる
-            collision.transform.SetParent(null);
+            // プレイヤーが離れたら記憶を消す
+            if (passenger == collision.transform)
+            {
+                passenger = null;
+            }
         }
     }
 
@@ -74,12 +103,15 @@ public class Minecart : MonoBehaviour
     public void ResetMinecart()
     {
         // トロッコを初期位置に戻す
-        if (waypoints.Count > 0)
+        if (worldWaypoints.Count > 0)
         {
-            transform.position = waypoints[0].position;
-            transform.rotation = Quaternion.Euler(waypoints[0].eulerAngles);
+            transform.position = worldWaypoints[0].position;
+            transform.rotation = Quaternion.Euler(worldWaypoints[0].eulerAngles);
             currentIndex = 0;
             isMoving = false;
+
+            // リセット時に乗客の記憶もクリア
+            passenger = null;
         }
     }
 }
@@ -93,14 +125,12 @@ public class MinecartEditor : Editor
     private Minecart route;
 
     // Inspectorが有効になったときに呼ばれる
-    // Called when the Inspector is enabled
     private void OnEnable()
     {
         route = (Minecart)target;
     }
 
     // Inspector上でのGUI描画
-    // GUI rendering in Inspector
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -111,10 +141,11 @@ public class MinecartEditor : Editor
         if (GUILayout.Button("Add point", GUILayout.Height(25)))
         {
             Undo.RecordObject(route, "Add Waypoint");
+            // 追加時の初期位置を (0,0) にすることで、オブジェクトの中心が原点になる
             route.waypoints.Add(new Waypoint
             {
-                position = route.transform.position,
-                eulerAngles = route.transform.eulerAngles
+                position = Vector2.zero,
+                eulerAngles = Vector3.zero
             });
         }
         GUI.backgroundColor = Color.white;
@@ -125,7 +156,6 @@ public class MinecartEditor : Editor
     protected virtual void OnSceneGUI()
     {
         // ウェイポイントが存在しない場合は何も描画しない
-        // Do nothing if there are no waypoints
         if (route.waypoints == null || route.waypoints.Count == 0) return;
 
         GUIStyle labelStyle = new GUIStyle();
@@ -135,11 +165,12 @@ public class MinecartEditor : Editor
         labelStyle.alignment = TextAnchor.MiddleCenter;
 
         // 各ウェイポイントに対してハンドルを描画
+        // Draw handles for each waypoint
         for (int i = 0; i < route.waypoints.Count; i++)
         {
-            // ワールド座標・回転をそのまま取得（ローカル変換を廃止）
-            Vector2 worldPos = route.waypoints[i].position;
-            Quaternion worldRot = Quaternion.Euler(route.waypoints[i].eulerAngles);
+            // ローカル座標をワールド座標に変換してハンドルを表示
+            Vector2 worldPos = route.transform.TransformPoint(route.waypoints[i].position);
+            Quaternion worldRot = route.transform.rotation * Quaternion.Euler(route.waypoints[i].eulerAngles);
 
             // ラベル表示
             // Display label
@@ -147,24 +178,25 @@ public class MinecartEditor : Editor
             Handles.Label(labelPos, $"Point {i}", labelStyle);
 
             // 向く方向を示す黄色い矢印を描画
-            // Draw a yellow arrow indicating the forward direction
             Handles.color = Color.yellow;
             Handles.ArrowHandleCap(0, worldPos, worldRot, 1.5f, EventType.Repaint);
 
             EditorGUI.BeginChangeCheck();
 
             // 移動ハンドル
+            // Position handle
             Vector3 newWorldPosition = Handles.PositionHandle(worldPos, worldRot);
             // 回転ハンドル
+            // Rotation handle
             Quaternion newWorldRotation = Handles.RotationHandle(worldRot, worldPos);
 
             // 変更があった場合、Undoを記録してウェイポイントを更新
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(route, "Modify Waypoint");
-                // 変更された座標・回転をワールド座標のまま保存
-                route.waypoints[i].position = newWorldPosition;
-                route.waypoints[i].eulerAngles = newWorldRotation.eulerAngles;
+                // 動かしたワールド座標を、オブジェクト基準のローカル座標に戻して保存
+                route.waypoints[i].position = route.transform.InverseTransformPoint(newWorldPosition);
+                route.waypoints[i].eulerAngles = (Quaternion.Inverse(route.transform.rotation) * newWorldRotation).eulerAngles;
             }
         }
     }

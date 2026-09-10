@@ -68,6 +68,20 @@ public class Minecart : MonoBehaviour
             collision.transform.SetParent(null);
         }
     }
+
+    // トロッコを初期位置に戻す処理
+    // Reset the minecart to its initial position
+    public void ResetMinecart()
+    {
+        // トロッコを初期位置に戻す
+        if (waypoints.Count > 0)
+        {
+            transform.position = waypoints[0].position;
+            transform.rotation = Quaternion.Euler(waypoints[0].eulerAngles);
+            currentIndex = 0;
+            isMoving = false;
+        }
+    }
 }
 
 // エディター側をカスタムする

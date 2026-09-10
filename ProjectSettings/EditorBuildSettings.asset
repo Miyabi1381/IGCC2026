@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Main/Scenes/GamePlayScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Kazuki/Play Scene.unity
-    guid: 099ceb431d39fc442ab8a8f0ab0e5eac
-  - enabled: 1
     path: Assets/Kazuki/Title Scene.unity
     guid: 3ee66b2d063856642884b05af7d5720e
+  - enabled: 1
+    path: Assets/Kazuki/Setting Scene.unity
+    guid: a8e332a4b7170fd469f52932ce1dc86a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

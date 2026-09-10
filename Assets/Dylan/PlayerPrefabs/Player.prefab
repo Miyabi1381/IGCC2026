@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 9137493616930787696}
   - component: {fileID: 1381211098808679164}
   - component: {fileID: 2388639915294107293}
+  - component: {fileID: 4752216166506665217}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,6 +197,7 @@ MonoBehaviour:
   ObstacleLayer:
     serializedVersion: 2
     m_Bits: 128
+  DebugKillKey: 1
 --- !u!61 &9137493616930787696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -267,7 +269,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2388639915294107293
 MonoBehaviour:
@@ -299,3 +301,15 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4752216166506665217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654146131017544287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88da06104d7138e4fabffcb3f0a70e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MiyaLib.StageTrigger

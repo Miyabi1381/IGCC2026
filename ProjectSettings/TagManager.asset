@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DoubleJump
   - Trap
+  - RoomBounds
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Wall
   - Trap
-  - 
+  - Corpse
   - 
   - 
   - 

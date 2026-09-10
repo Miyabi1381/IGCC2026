@@ -47,6 +47,13 @@ public class DeathManager : MonoBehaviour
         SpawnNextPlayer(); // spawns the very first player too, so it gets a variant + death/skeleton sprites like everyone else
     }
 
+    // Runtime lookup so prefabs (like StageTrigger) never need a direct serialized scene
+    // reference to the camera's confiner — they just ask DeathManager for it when needed.
+    public CinemachineConfiner2D GetCameraConfiner()
+    {
+        return GameCamera != null ? GameCamera.GetComponent<CinemachineConfiner2D>() : null;
+    }
+
     public void RegisterPlayer(GameObject player)
     {
         currentPlayer = player;
@@ -137,6 +144,8 @@ public class DeathManager : MonoBehaviour
 
         // Apply the next variant's full look — body sprite, matching death/skeleton sprites, and scale —
         // all bundled together so they can never drift out of sync or need manual per-death fixing.
+        PlayerController controller = newPlayer.GetComponent<PlayerController>();
+
         if (PlayerVariants != null && PlayerVariants.Length > 0)
         {
             PlayerVariant variant = PlayerVariants[deathCount % PlayerVariants.Length];
@@ -147,9 +156,12 @@ public class DeathManager : MonoBehaviour
 
             newPlayer.transform.localScale = variant.Scale;
 
-            PlayerController controller = newPlayer.GetComponent<PlayerController>();
             if (controller != null)
                 controller.SetVariantDeathAssets(variant.DeathPoseSprite, variant.SkeletonSprite);
         }
+
+        // Register immediately rather than waiting for newPlayer's own Start() — Start() is deferred
+        // until just before next Update, which leaves Cinemachine's Follow null for a frame otherwise.
+        RegisterPlayer(newPlayer);
     }
 }

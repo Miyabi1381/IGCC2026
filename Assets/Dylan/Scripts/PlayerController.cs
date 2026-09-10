@@ -350,6 +350,14 @@ public class PlayerController : MonoBehaviour
         if (spriteRenderer != null && deathPoseSprite != null)
             spriteRenderer.sprite = deathPoseSprite;
 
+        // Put the corpse on its own layer so it's treated as standable/climbable —
+        // works automatically as long as "Corpse" is checked in GroundLayer/WallLayer in the Inspector.
+        int corpseLayer = LayerMask.NameToLayer("Corpse");
+        if (corpseLayer != -1)
+            gameObject.layer = corpseLayer;
+        else
+            Debug.LogWarning("PlayerController: No layer named 'Corpse' found. Add one in Project Settings > Tags and Layers.");
+
         if (DeathManager.Instance != null)
             DeathManager.Instance.PlayerDied(gameObject);
     }

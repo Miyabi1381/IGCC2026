@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class DeathManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class DeathManager : MonoBehaviour
     public Transform RespawnPoint;
 
     [Header("--- CAMERA ---")]
-    public CameraFollow GameCamera; // drag the camera holding CameraFollow.cs here
+    public CinemachineCamera GameCamera; // drag the CinemachineCamera object here
 
     [Header("--- STAMINA UI ---")]
     public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
@@ -47,6 +48,13 @@ public class DeathManager : MonoBehaviour
         SpawnNextPlayer(); // spawns the very first player too, so it gets a variant + death/skeleton sprites like everyone else
     }
 
+    // Runtime lookup so prefabs (like StageTrigger) never need a direct serialized scene
+    // reference to the camera's confiner — they just ask DeathManager for it when needed.
+    public CinemachineConfiner2D GetCameraConfiner()
+    {
+        return GameCamera != null ? GameCamera.GetComponent<CinemachineConfiner2D>() : null;
+    }
+
     public void RegisterPlayer(GameObject player)
     {
         currentPlayer = player;
@@ -56,9 +64,9 @@ public class DeathManager : MonoBehaviour
         if (controller != null && DoubleJumpUnlocked)
             controller.HasDoubleJumpUnlocked = true;
 
-        // Retarget the camera to follow whichever player is currently alive
+        // Retarget the Cinemachine camera to follow whichever player is currently alive
         if (GameCamera != null)
-            GameCamera.SetTarget(player.transform);
+            GameCamera.Follow = player.transform; // convenience alias for Target.TrackingTarget
 
         // Retarget the stamina bar's position-follow and its data source to the new player
         if (StaminaBarPosition != null)
@@ -94,7 +102,7 @@ public class DeathManager : MonoBehaviour
         }
 
         activeCorpse = corpse; // this new corpse is now the only collidable one
-        corpseHistory.Add(corpse);
+        corpseHistory.Add(corpse); // track every corpse so we can trim the oldest later
 
         TrimOldestCorpses();
 
@@ -137,6 +145,8 @@ public class DeathManager : MonoBehaviour
 
         // Apply the next variant's full look — body sprite, matching death/skeleton sprites, and scale —
         // all bundled together so they can never drift out of sync or need manual per-death fixing.
+        PlayerController controller = newPlayer.GetComponent<PlayerController>();
+
         if (PlayerVariants != null && PlayerVariants.Length > 0)
         {
             PlayerVariant variant = PlayerVariants[deathCount % PlayerVariants.Length];
@@ -147,9 +157,12 @@ public class DeathManager : MonoBehaviour
 
             newPlayer.transform.localScale = variant.Scale;
 
-            PlayerController controller = newPlayer.GetComponent<PlayerController>();
             if (controller != null)
                 controller.SetVariantDeathAssets(variant.DeathPoseSprite, variant.SkeletonSprite);
         }
+
+        // Register immediately rather than waiting for newPlayer's own Start() — Start() is deferred
+        // until just before next Update, which leaves Cinemachine's Follow null for a frame otherwise.
+        RegisterPlayer(newPlayer);
     }
 }

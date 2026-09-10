@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     private Sprite skeletonSprite;   // assigned per-spawn by DeathManager, matching this variant
     private bool isDead = false;
 
+    [Header("--- DEBUG ---")]
+    public bool DebugKillKey = true; // toggle off before a real build
+
     // --- PRIVATE INTERNAL STATES ---
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -80,7 +83,7 @@ public class PlayerController : MonoBehaviour
         currentStamina = MaxClimbStamina;
 
         if (DeathManager.Instance != null)
-            DeathManager.Instance.RegisterPlayer(gameObject);
+            DeathManager.Instance.RegisterPlayer(gameObject); // safety net — DeathManager already registers this synchronously on spawn, but this covers cases where a player is placed manually in the scene
     }
 
     void Update()
@@ -100,6 +103,11 @@ public class PlayerController : MonoBehaviour
                 localScale.x *= -1f;
                 transform.localScale = localScale;
             }
+        }
+
+        if (DebugKillKey && Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            Die();
         }
     }
 
@@ -323,10 +331,10 @@ public class PlayerController : MonoBehaviour
         skeletonSprite = skeleton;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isDead) return;
-        if (((1 << collider.gameObject.layer) & ObstacleLayer) != 0)
+        if (((1 << collision.gameObject.layer) & ObstacleLayer) != 0)
         {
             Die();
         }

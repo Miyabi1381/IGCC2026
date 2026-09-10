@@ -240,6 +240,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.settings-manager": {
+      "version": "2.1.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.shadergraph": {
       "version": "17.3.0",
       "depth": 1,
@@ -250,7 +257,11 @@
       }
     },
     "com.unity.splines": {
+<<<<<<< HEAD
+      "version": "2.9.0",
+=======
       "version": "2.8.4",
+>>>>>>> main
       "depth": 1,
       "source": "registry",
       "dependencies": {

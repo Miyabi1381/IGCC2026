@@ -178,7 +178,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0.5, y: 0.1}
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 264
   WallCheck: {fileID: 2502854638900277482}
   wallCheckSize: {x: 0.1, y: 0.8}
   WallSlideSpeed: 2

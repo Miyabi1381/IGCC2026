@@ -1,90 +1,122 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class Waypoint
 {
-    public Vector2 position; // ƒ[ƒ‹ƒhˆÊ’u World position
-    public Vector3 eulerAngles;// ‰ñ“]Šp“x Rotation angles
+    public Vector2 position; // ãƒ­ãƒ¼ã‚«ãƒ«ä½ç½® Local position
+    public Vector3 eulerAngles;// ãƒ­ãƒ¼ã‚«ãƒ«å›è»¢è§’åº¦ Local rotation angles
 }
 
 public class Minecart : MonoBehaviour
 {
-    [Header("ƒŒ[ƒ‹‚ÌŒo˜Hİ’è Rail path settings")]
-    public List<Waypoint> waypoints = new List<Waypoint>(); // ƒEƒFƒCƒ|ƒCƒ“ƒg‚ÌƒŠƒXƒg List of waypoints
-    [SerializeField] private float speed = 5f;  // ˆÚ“®‘¬“x Movement speed
-    [SerializeField] private float rotationSpeed = 180f;    // ‰ñ“]‘¬“x Rotation speed
+    [Header("ãƒ¬ãƒ¼ãƒ«ã®çµŒè·¯è¨­å®š Rail path settings")]
+    public List<Waypoint> waypoints = new List<Waypoint>(); // ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆã®ãƒªã‚¹ãƒˆ List of waypoints
+    [SerializeField] private float speed = 5f;  // ç§»å‹•é€Ÿåº¦ Movement speed
+    [SerializeField] private float rotationSpeed = 180f;    // å›è»¢é€Ÿåº¦ Rotation speed
 
-    private int currentIndex = 0;   // Œ»İ‚Ì–Ú•WƒEƒFƒCƒ|ƒCƒ“ƒg‚ÌƒCƒ“ƒfƒbƒNƒX Current target waypoint index
-    private bool isMoving = false;   // ˆÚ“®’†‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO Flag indicating whether the minecart is moving
+    private int currentIndex = 0;   // ç¾åœ¨ã®ç›®æ¨™ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ Current target waypoint index
+    private bool isMoving = false;   // ç§»å‹•ä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚° Flag indicating whether the minecart is moving
+    private Transform passenger = null;    // ä¹—ã£ã¦ã„ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨˜æ†¶ã™ã‚‹å¤‰æ•° Passenger memory variable
+
+    // ã‚²ãƒ¼ãƒ ä¸­ã«å®Ÿéš›ã«ä½¿ç”¨ã™ã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®ãƒªã‚¹ãƒˆ List of absolute world coordinates used during gameplay
+    private List<Waypoint> worldWaypoints = new List<Waypoint>();
+
+    void Start()
+    {
+        // ã‚²ãƒ¼ãƒ é–‹å§‹ã®ç¬é–“ã«ã€ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã¦å›ºå®šã™ã‚‹
+        foreach (var wp in waypoints)
+        {
+            Waypoint absoluteWp = new Waypoint();
+            absoluteWp.position = transform.TransformPoint(wp.position);
+            absoluteWp.eulerAngles = (transform.rotation * Quaternion.Euler(wp.eulerAngles)).eulerAngles;
+            worldWaypoints.Add(absoluteWp);
+        }
+    }
 
     void Update()
     {
-        // ƒEƒFƒCƒ|ƒCƒ“ƒg‚ª‘¶İ‚µ‚È‚¢ê‡‚âˆÚ“®‚ª–³Œø‚Èê‡‚Íˆ—‚ğƒXƒLƒbƒv
-        if (!isMoving || waypoints.Count == 0 || currentIndex >= waypoints.Count) return;
+        // ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆãŒå­˜åœ¨ã—ãªã„å ´åˆã‚„ç§»å‹•ãŒç„¡åŠ¹ãªå ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
+        if (!isMoving || worldWaypoints.Count == 0 || currentIndex >= worldWaypoints.Count) return;
 
-        // Œ»İ‚Ì–Ú•Wƒ|ƒCƒ“ƒg‚ğæ“¾
-        Waypoint target = waypoints[currentIndex];
+        // ç§»å‹•ã™ã‚‹å‰ã®ä½ç½®ã‚’è¨˜æ†¶
+        Vector3 previousPosition = transform.position;
 
-        // í‚É“¯‚¶‘¬“x‚Å–Ú•Wƒ|ƒCƒ“ƒg‚ÖŒü‚©‚Á‚ÄˆÚ“®iƒ[ƒ‹ƒhÀ•W‚Æ‚µ‚Äˆµ‚¤j
+        // ç¾åœ¨ã®ç›®æ¨™ãƒã‚¤ãƒ³ãƒˆã‚’å–å¾—
+        Waypoint target = worldWaypoints[currentIndex];
+
+        // å¸¸ã«åŒã˜é€Ÿåº¦ã§ç›®æ¨™ãƒã‚¤ãƒ³ãƒˆã¸å‘ã‹ã£ã¦ç§»å‹•
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // –Ú•W‚ÌŠp“x‚ÖŒü‚©‚Á‚ÄƒgƒƒbƒR‚ğ‰ñ“]‚³‚¹‚éˆ—
+        // ç›®æ¨™ã®è§’åº¦ã¸å‘ã‹ã£ã¦ãƒˆãƒ­ãƒƒã‚³ã‚’å›è»¢ã•ã›ã‚‹å‡¦ç†
         Quaternion targetRotation = Quaternion.Euler(target.eulerAngles);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        // –Ú•Wƒ|ƒCƒ“ƒg‚É‚Ù‚Ú“’B‚µ‚½‚çAŸ‚Ìƒ|ƒCƒ“ƒg‚ÖØ‚è‘Ö‚¦
+        // ãƒˆãƒ­ãƒƒã‚³ãŒå‹•ã„ãŸã ã‘ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«è¶³ã™
+        if (passenger != null)
+        {
+            Vector3 deltaPosition = transform.position - previousPosition;
+            passenger.position += deltaPosition;
+        }
+
+        // ç›®æ¨™ãƒã‚¤ãƒ³ãƒˆã«ã»ã¼åˆ°é”ã—ãŸã‚‰ã€æ¬¡ã®ãƒã‚¤ãƒ³ãƒˆã¸åˆ‡ã‚Šæ›¿ãˆ
         if (Vector2.Distance(transform.position, target.position) < 0.05f)
         {
             currentIndex++;
         }
     }
-    // ƒvƒŒƒCƒ„[‚ªƒgƒƒbƒR‚Éæ‚Á‚½‚Ìˆ—
+
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒãƒˆãƒ­ãƒƒã‚³ã«ä¹—ã£ãŸæ™‚ã®å‡¦ç†
     // When the player gets on the minecart
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // ƒvƒŒƒCƒ„[‚ğƒgƒƒbƒR‚ÌqƒIƒuƒWƒFƒNƒg‚É‚µ‚Äˆê‚É“®‚©‚·
-            collision.transform.SetParent(transform);
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã›ãšã€å¤‰æ•°ã¨ã—ã¦è¨˜æ†¶ã™ã‚‹
+            passenger = collision.transform;
 
-            // ƒgƒƒbƒR‚ğ”­Ô‚³‚¹‚é
+            // ãƒˆãƒ­ãƒƒã‚³ã‚’ç™ºè»Šã•ã›ã‚‹
             isMoving = true;
         }
     }
 
-    // ƒvƒŒƒCƒ„[‚ªƒgƒƒbƒR‚©‚ç~‚è‚½‚Ìˆ—
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒãƒˆãƒ­ãƒƒã‚³ã‹ã‚‰é™ã‚ŠãŸæ™‚ã®å‡¦ç†
     // When the player leaves the minecart
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // ƒgƒƒbƒR‚ª”ñƒAƒNƒeƒBƒu‚Ìê‡‚Íˆ—‚ğƒXƒLƒbƒv
+        // ãƒˆãƒ­ãƒƒã‚³ãŒéã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã®å ´åˆã¯å‡¦ç†ã‚’ã‚¹ã‚­ãƒƒãƒ—
         if (!this.gameObject.activeInHierarchy) return;
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            // eqŠÖŒW‚ğ‰ğœ‚µ‚ÄƒvƒŒƒCƒ„[‚ğ“Æ—§‚³‚¹‚é
-            collision.transform.SetParent(null);
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒé›¢ã‚ŒãŸã‚‰è¨˜æ†¶ã‚’æ¶ˆã™
+            if (passenger == collision.transform)
+            {
+                passenger = null;
+            }
         }
     }
 
-    // ƒgƒƒbƒR‚ğ‰ŠúˆÊ’u‚É–ß‚·ˆ—
+    // ãƒˆãƒ­ãƒƒã‚³ã‚’åˆæœŸä½ç½®ã«æˆ»ã™å‡¦ç†
     // Reset the minecart to its initial position
     public void ResetMinecart()
     {
-        // ƒgƒƒbƒR‚ğ‰ŠúˆÊ’u‚É–ß‚·
-        if (waypoints.Count > 0)
+        // ãƒˆãƒ­ãƒƒã‚³ã‚’åˆæœŸä½ç½®ã«æˆ»ã™
+        if (worldWaypoints.Count > 0)
         {
-            transform.position = waypoints[0].position;
-            transform.rotation = Quaternion.Euler(waypoints[0].eulerAngles);
+            transform.position = worldWaypoints[0].position;
+            transform.rotation = Quaternion.Euler(worldWaypoints[0].eulerAngles);
             currentIndex = 0;
             isMoving = false;
+
+            // ãƒªã‚»ãƒƒãƒˆæ™‚ã«ä¹—å®¢ã®è¨˜æ†¶ã‚‚ã‚¯ãƒªã‚¢
+            passenger = null;
         }
     }
 }
 
-// ƒGƒfƒBƒ^[‘¤‚ğƒJƒXƒ^ƒ€‚·‚é
+// ã‚¨ãƒ‡ã‚£ã‚¿ãƒ¼å´ã‚’ã‚«ã‚¹ã‚¿ãƒ ã™ã‚‹
 // Customize the editor side
 #if UNITY_EDITOR
 [CustomEditor(typeof(Minecart))]
@@ -92,15 +124,13 @@ public class MinecartEditor : Editor
 {
     private Minecart route;
 
-    // Inspector‚ª—LŒø‚É‚È‚Á‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
-    // Called when the Inspector is enabled
+    // InspectorãŒæœ‰åŠ¹ã«ãªã£ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹
     private void OnEnable()
     {
         route = (Minecart)target;
     }
 
-    // Inspectorã‚Å‚ÌGUI•`‰æ
-    // GUI rendering in Inspector
+    // Inspectorä¸Šã§ã®GUIæç”»
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -111,21 +141,21 @@ public class MinecartEditor : Editor
         if (GUILayout.Button("Add point", GUILayout.Height(25)))
         {
             Undo.RecordObject(route, "Add Waypoint");
+            // è¿½åŠ æ™‚ã®åˆæœŸä½ç½®ã‚’ (0,0) ã«ã™ã‚‹ã“ã¨ã§ã€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸­å¿ƒãŒåŸç‚¹ã«ãªã‚‹
             route.waypoints.Add(new Waypoint
             {
-                position = route.transform.position,
-                eulerAngles = route.transform.eulerAngles
+                position = Vector2.zero,
+                eulerAngles = Vector3.zero
             });
         }
         GUI.backgroundColor = Color.white;
     }
 
-    // Sceneƒrƒ…[ã‚Å‚ÌGUI•`‰æ
+    // Sceneãƒ“ãƒ¥ãƒ¼ä¸Šã§ã®GUIæç”»
     // GUI rendering in Scene view
     protected virtual void OnSceneGUI()
     {
-        // ƒEƒFƒCƒ|ƒCƒ“ƒg‚ª‘¶İ‚µ‚È‚¢ê‡‚Í‰½‚à•`‰æ‚µ‚È‚¢
-        // Do nothing if there are no waypoints
+        // ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ä½•ã‚‚æç”»ã—ãªã„
         if (route.waypoints == null || route.waypoints.Count == 0) return;
 
         GUIStyle labelStyle = new GUIStyle();
@@ -134,37 +164,39 @@ public class MinecartEditor : Editor
         labelStyle.fontSize = 14;
         labelStyle.alignment = TextAnchor.MiddleCenter;
 
-        // ŠeƒEƒFƒCƒ|ƒCƒ“ƒg‚É‘Î‚µ‚Äƒnƒ“ƒhƒ‹‚ğ•`‰æ
+        // å„ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆã«å¯¾ã—ã¦ãƒãƒ³ãƒ‰ãƒ«ã‚’æç”»
+        // Draw handles for each waypoint
         for (int i = 0; i < route.waypoints.Count; i++)
         {
-            // ƒ[ƒ‹ƒhÀ•WE‰ñ“]‚ğ‚»‚Ì‚Ü‚Üæ“¾iƒ[ƒJƒ‹•ÏŠ·‚ğ”p~j
-            Vector2 worldPos = route.waypoints[i].position;
-            Quaternion worldRot = Quaternion.Euler(route.waypoints[i].eulerAngles);
+            // ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã¦ãƒãƒ³ãƒ‰ãƒ«ã‚’è¡¨ç¤º
+            Vector2 worldPos = route.transform.TransformPoint(route.waypoints[i].position);
+            Quaternion worldRot = route.transform.rotation * Quaternion.Euler(route.waypoints[i].eulerAngles);
 
-            // ƒ‰ƒxƒ‹•\¦
+            // ãƒ©ãƒ™ãƒ«è¡¨ç¤º
             // Display label
             Vector2 labelPos = worldPos + Vector2.down * 0.4f;
             Handles.Label(labelPos, $"Point {i}", labelStyle);
 
-            // Œü‚­•ûŒü‚ğ¦‚·‰©F‚¢–îˆó‚ğ•`‰æ
-            // Draw a yellow arrow indicating the forward direction
+            // å‘ãæ–¹å‘ã‚’ç¤ºã™é»„è‰²ã„çŸ¢å°ã‚’æç”»
             Handles.color = Color.yellow;
             Handles.ArrowHandleCap(0, worldPos, worldRot, 1.5f, EventType.Repaint);
 
             EditorGUI.BeginChangeCheck();
 
-            // ˆÚ“®ƒnƒ“ƒhƒ‹
+            // ç§»å‹•ãƒãƒ³ãƒ‰ãƒ«
+            // Position handle
             Vector3 newWorldPosition = Handles.PositionHandle(worldPos, worldRot);
-            // ‰ñ“]ƒnƒ“ƒhƒ‹
+            // å›è»¢ãƒãƒ³ãƒ‰ãƒ«
+            // Rotation handle
             Quaternion newWorldRotation = Handles.RotationHandle(worldRot, worldPos);
 
-            // •ÏX‚ª‚ ‚Á‚½ê‡AUndo‚ğ‹L˜^‚µ‚ÄƒEƒFƒCƒ|ƒCƒ“ƒg‚ğXV
+            // å¤‰æ›´ãŒã‚ã£ãŸå ´åˆã€Undoã‚’è¨˜éŒ²ã—ã¦ã‚¦ã‚§ã‚¤ãƒã‚¤ãƒ³ãƒˆã‚’æ›´æ–°
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(route, "Modify Waypoint");
-                // •ÏX‚³‚ê‚½À•WE‰ñ“]‚ğƒ[ƒ‹ƒhÀ•W‚Ì‚Ü‚Ü•Û‘¶
-                route.waypoints[i].position = newWorldPosition;
-                route.waypoints[i].eulerAngles = newWorldRotation.eulerAngles;
+                // å‹•ã‹ã—ãŸãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’ã€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–ã®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã«æˆ»ã—ã¦ä¿å­˜
+                route.waypoints[i].position = route.transform.InverseTransformPoint(newWorldPosition);
+                route.waypoints[i].eulerAngles = (Quaternion.Inverse(route.transform.rotation) * newWorldRotation).eulerAngles;
             }
         }
     }

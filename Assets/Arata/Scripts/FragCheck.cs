@@ -9,8 +9,8 @@ public class FragCheck : MonoBehaviour
 
     void Update()
     {
-        // Keyboard.currentがnullでないか確認し、スペースキーが押された瞬間を検知
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        // Keyboard.current縺系ull縺ｧ縺ｪ縺�縺狗｢ｺ隱阪＠縲√せ繝壹�ｼ繧ｹ繧ｭ繝ｼ縺梧款縺輔ｌ縺溽椪髢薙ｒ讀懃衍
+        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
             DropObject[] dropObjects = FindObjectsByType<DropObject>(FindObjectsSortMode.None);
             Minecart[] minecarts = FindObjectsByType<Minecart>(FindObjectsSortMode.None);

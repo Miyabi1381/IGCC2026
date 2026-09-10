@@ -85,4 +85,20 @@ public class DropObject : MonoBehaviour
             Debug.Log("Hit Ground");
         }
     }
+
+    // 作動した後に、再度作動させるためのリセット処理
+    // Reset process to allow reactivation after it has been triggered
+    public void ResetDropObject()
+    {
+        // Reset the drop object to its original state
+        isTriggered = false;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0f;
+        transform.position = originalPos;
+        // Deactivate all child objects
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
 }

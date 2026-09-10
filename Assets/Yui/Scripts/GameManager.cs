@@ -5,6 +5,8 @@ using UnityEngine;
  *  HandlePauseChangedの中に何か特別にしたいことがあったら書く。
  *  特になければこの例文のようなものを入れておけばpauseの実装ができるはず
 
+後シングルトンになってるから、最初のタイトルシーンに置くだけで大丈夫だよ
+
 * Create a script like the example below in the player's script, etc.
 * Write anything special you want to do inside HandlePauseChanged.
 * If there's nothing special to do, just putting something like this example should implement pause.

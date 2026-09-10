@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+//シングルトンになってるから、最初のタイトルシーンに置くだけで大丈夫だよ
+//使い方はSoundManager.Instance.PlaySE("ライブラリ内のID");で使えるよ
 [DisallowMultipleComponent]
 public class SoundManager : MonoBehaviour
 {

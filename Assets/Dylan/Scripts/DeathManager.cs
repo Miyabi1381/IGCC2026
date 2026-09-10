@@ -102,11 +102,7 @@ public class DeathManager : MonoBehaviour
         }
 
         activeCorpse = corpse; // this new corpse is now the only collidable one
-<<<<<<< Updated upstream
         corpseHistory.Add(corpse); // track every corpse so we can trim the oldest later
-=======
-        corpseHistory.Add(corpse); //track every corpse so we can trim the oldest later
->>>>>>> Stashed changes
 
         TrimOldestCorpses();
 

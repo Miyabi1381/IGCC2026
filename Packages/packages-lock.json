@@ -109,6 +109,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.cinemachine": {
+      "version": "3.1.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.splines": "2.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "2.13.6",
       "depth": 0,
@@ -218,8 +228,6 @@
     },
     "com.unity.searcher": {
       "version": "4.9.5",
-<<<<<<< Updated upstream
-=======
       "depth": 2,
       "source": "registry",
       "dependencies": {},
@@ -227,7 +235,6 @@
     },
     "com.unity.settings-manager": {
       "version": "2.1.1",
->>>>>>> Stashed changes
       "depth": 2,
       "source": "registry",
       "dependencies": {},
@@ -242,8 +249,6 @@
         "com.unity.searcher": "4.9.3"
       }
     },
-<<<<<<< Updated upstream
-=======
     "com.unity.splines": {
       "version": "2.9.0",
       "depth": 1,
@@ -255,7 +260,6 @@
       },
       "url": "https://packages.unity.com"
     },
->>>>>>> Stashed changes
     "com.unity.test-framework": {
       "version": "1.6.0",
       "depth": 0,

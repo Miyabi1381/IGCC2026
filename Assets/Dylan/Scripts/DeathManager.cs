@@ -26,12 +26,16 @@ public class DeathManager : MonoBehaviour
     public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
     public StaminaBarUI StaminaBarDisplay;      // drag the StaminaBar object holding StaminaBarUI.cs here
 
+    [Header("--- CORPSE CLEANUP ---")]
+    public int MaxCorpses = 10; // total corpses allowed in the scene (active + retired); oldest is deleted past this
+
     [Header("--- ABILITY UNLOCKS (persist across every future spawn) ---")]
     public bool DoubleJumpUnlocked = false; // lives here, not on PlayerController, so it survives Destroy
 
     private int deathCount = 0;
     private GameObject currentPlayer;
     private GameObject activeCorpse; // the most recently died player — the only collidable corpse
+    private System.Collections.Generic.List<GameObject> corpseHistory = new System.Collections.Generic.List<GameObject>(); // oldest first
 
     void Awake()
     {
@@ -90,9 +94,28 @@ public class DeathManager : MonoBehaviour
         }
 
         activeCorpse = corpse; // this new corpse is now the only collidable one
+        corpseHistory.Add(corpse);
+
+        TrimOldestCorpses();
 
         deathCount++;
         SpawnNextPlayer();
+    }
+
+    // Deletes the oldest corpses once the total exceeds MaxCorpses, keeping the scene from
+    // accumulating an unbounded number of dead player objects over a long play session.
+    private void TrimOldestCorpses()
+    {
+        if (MaxCorpses <= 0) return; // 0 or negative = no cap, skip cleanup entirely
+
+        while (corpseHistory.Count > MaxCorpses)
+        {
+            GameObject oldest = corpseHistory[0];
+            corpseHistory.RemoveAt(0);
+
+            if (oldest != null)
+                Destroy(oldest);
+        }
     }
 
     private void SpawnNextPlayer()

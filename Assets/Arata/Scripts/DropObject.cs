@@ -9,7 +9,7 @@ public class DropObject : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float GravityScale = 1f; // Gravity scale for the falling rock 重力
 
-    [Header("Telegraph Settings")]
+    [Header("Vibration settings　揺れの設定")]
     [SerializeField] private float shakeDuration = 0.35f; // shake duration in seconds 揺れる時間
     [SerializeField] private float shakeMagnitude = 0.06f; // Range of fluctuation  揺れ幅
 
@@ -25,6 +25,11 @@ public class DropObject : MonoBehaviour
 
     void Update()
     {
+        // 落ちてくるオブジェクトの状態に応じて子オブジェクトを切り替える
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(isTriggered);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

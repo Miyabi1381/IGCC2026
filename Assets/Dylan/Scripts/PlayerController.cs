@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     public float WallSlideSpeed = 2f;
     public Vector2 WallJumpForce = new Vector2(12f, 14f);
+    public LayerMask WallLayer;
+
+    [Header("--- WALL JUMP TUNING ---")]
+    public float WallJumpLockTime = 0.15f; // how long horizontal input is ignored after a wall jump
+    private float wallJumpLockTimer = 0f;
 
     [Header("--- CELESTE STAMINA SYSTEM ---")]
     public float MaxClimbStamina = 4f;
@@ -30,12 +35,6 @@ public class PlayerController : MonoBehaviour
     public float DashSpeed = 25f;
     public float DashTime = 0.15f;
 
-    public float DashCooldown = 0.2f;
-
-    [Header("--- WALL JUMP TUNING ---")]
-    public float WallJumpLockTime = 0.15f; // how long horizontal input is ignored after a wall jump
-    private float wallJumpLockTimer = 0f;
-
     [Header("--- COYOTE TIME & JUMP BUFFER ---")]
     public float CoyoteTime = 0.1f;
     public float JumpBufferTime = 0.1f;
@@ -44,29 +43,44 @@ public class PlayerController : MonoBehaviour
 
     [Header("--- ABILITY UNLOCKS ---")]
     public bool HasDoubleJumpUnlocked = false;
+
+    [Header("--- DEATH ---")]
+    public LayerMask ObstacleLayer;
+    private Sprite deathPoseSprite;  // assigned per-spawn by DeathManager, matching this variant
+    private Sprite skeletonSprite;   // assigned per-spawn by DeathManager, matching this variant
+    private bool isDead = false;
+
     // --- PRIVATE INTERNAL STATES ---
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D col;
     private float moveInput;
     private Vector2 fullMoveInput;
 
     private bool IsFacingRight = true;
     private bool isGrounded = true;
-    private bool wasGrounded = false;
     private bool wasGroundedStable = false;
     private bool isDoubleJump = false;
     private bool isTouchingWall;
     private bool isWallSliding;
     private bool isClimbing;
-    public float StaminaPercent => currentStamina / MaxClimbStamina;
-    public bool IsClimbing => isClimbing;
     private bool holdClimbInput;
     private bool isDashing;
     private bool canDash = true;
 
+    // --- PUBLIC ACCESSORS (for UI / external systems) ---
+    public float StaminaPercent => currentStamina / MaxClimbStamina;
+    public bool IsClimbing => isClimbing;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
         currentStamina = MaxClimbStamina;
+
+        if (DeathManager.Instance != null)
+            DeathManager.Instance.RegisterPlayer(gameObject);
     }
 
     void Update()
@@ -75,7 +89,7 @@ public class PlayerController : MonoBehaviour
         CheckWallStatus();
         DetermineMovementStates();
         HandleStaminaDecay();
-        HandleJumpBuffer(); // NEW
+        HandleJumpBuffer();
 
         if (!isDashing && !isClimbing)
         {
@@ -101,9 +115,11 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, GroundLayer);
 
-        bool isGroundedStable = isGrounded && !isDashing; 
+        // Dashing never counts as "settled" on ground, even if the dash path grazes it,
+        // so mid-air diagonal dashes near the floor can't falsely refresh dash/double jump.
+        bool isGroundedStable = isGrounded && !isDashing;
 
-        if (isGroundedStable && !wasGroundedStable) 
+        if (isGroundedStable && !wasGroundedStable)
         {
             isDoubleJump = false;
             canDash = true;
@@ -112,7 +128,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (isGrounded)
-            coyoteTimer = CoyoteTime; 
+            coyoteTimer = CoyoteTime;
         else
             coyoteTimer -= Time.deltaTime;
 
@@ -123,7 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (WallCheck != null)
         {
-            isTouchingWall = Physics2D.OverlapBox(WallCheck.position, wallCheckSize, 0f, GroundLayer);
+            isTouchingWall = Physics2D.OverlapBox(WallCheck.position, wallCheckSize, 0f, WallLayer);
         }
     }
 
@@ -135,7 +151,7 @@ public class PlayerController : MonoBehaviour
         else
             isWallSliding = false;
 
-        // WALL CLIMB/HOLD: Only true if touching a wall, holding grab, and NOT exhausted
+        // WALL HOLD: Only true if touching a wall, holding grab, and NOT exhausted
         if (isTouchingWall && !isGrounded && holdClimbInput && !isExhausted)
             isClimbing = true;
         else
@@ -146,12 +162,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isClimbing)
         {
-            // Drain stamina over time while climbing or clinging
             currentStamina -= Time.deltaTime;
             if (currentStamina <= 0)
             {
                 currentStamina = 0;
-                isExhausted = true; // Forcibly drops the grab state
+                isExhausted = true; // Forcibly drops the hold state
             }
         }
     }
@@ -160,6 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isClimbing)
         {
+            // Static hold only — no climbing up/down. Player can only jump off or let go.
             rb.linearVelocity = Vector2.zero;
             rb.gravityScale = 0f;
             return;
@@ -170,7 +186,7 @@ public class PlayerController : MonoBehaviour
         if (wallJumpLockTimer > 0f)
         {
             wallJumpLockTimer -= Time.fixedDeltaTime;
-            return; // skip overwriting X velocity, let the wall jump force play out
+            return; // skip overwriting X velocity so the wall jump push isn't erased
         }
 
         rb.linearVelocity = new Vector2(moveInput * Speed, rb.linearVelocity.y);
@@ -180,42 +196,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isWallSliding)
         {
-            // Caps the falling speed to simulate wall friction drag
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -WallSlideSpeed);
-        }
-    }
-
-    // --- INPUT SYSTEM RECEIVERS ---
-
-    public void OnMove(InputValue value)
-    {
-        Vector2 inputVector = value.Get<Vector2>();
-        fullMoveInput = inputVector;
-        moveInput = inputVector.x;
-    }
-
-    public void OnJump(InputValue value)
-    {
-        if (value.isPressed)
-        {
-            jumpBufferTimer = JumpBufferTime;
-
-            // Wall jump still fires immediately — it doesn't need buffering/coyote,
-            // since it depends on isTouchingWall which is a direct, current check
-            if (!isGrounded && isTouchingWall)
-            {
-                int pushDirection = IsFacingRight ? -1 : 1;
-                rb.linearVelocity = new Vector2(pushDirection * WallJumpForce.x, WallJumpForce.y);
-                wallJumpLockTimer = WallJumpLockTime;
-                holdClimbInput = false;
-
-                IsFacingRight = !IsFacingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-
-                jumpBufferTimer = 0f; 
-            }
         }
     }
 
@@ -239,6 +220,40 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
             isDoubleJump = true;
             jumpBufferTimer = 0f;
+        }
+    }
+
+    // --- INPUT SYSTEM RECEIVERS ---
+
+    public void OnMove(InputValue value)
+    {
+        Vector2 inputVector = value.Get<Vector2>();
+        fullMoveInput = inputVector;
+        moveInput = inputVector.x;
+    }
+
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            jumpBufferTimer = JumpBufferTime; // remember the press briefly for HandleJumpBuffer()
+
+            // Wall jump fires immediately — it depends on real-time wall contact,
+            // not something worth delaying through the buffer.
+            if (!isGrounded && isTouchingWall)
+            {
+                int pushDirection = IsFacingRight ? -1 : 1;
+                rb.linearVelocity = new Vector2(pushDirection * WallJumpForce.x, WallJumpForce.y);
+                wallJumpLockTimer = WallJumpLockTime;
+                holdClimbInput = false; // force-release hold so isClimbing doesn't re-trigger and cancel the jump
+
+                IsFacingRight = !IsFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+
+                jumpBufferTimer = 0f; // consumed, don't also trigger a buffered ground/double jump
+            }
         }
     }
 
@@ -283,11 +298,69 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = originalGravity;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y * 0.5f);
         isDashing = false;
-        yield return new WaitForSeconds(DashCooldown);
+        // canDash re-enables only via the landing edge check in CheckGrounded() — matches double jump behavior
     }
 
+    // --- ABILITY UNLOCKS ---
+
+    // Called by the double-jump pickup trigger. Routes through DeathManager so the unlock
+    // is remembered permanently and auto-applied to every future spawned player, not just this one.
     public void UnlockDoubleJump()
     {
-        HasDoubleJumpUnlocked = true;
+        if (DeathManager.Instance != null)
+            DeathManager.Instance.UnlockDoubleJumpPermanently();
+        else
+            HasDoubleJumpUnlocked = true; // fallback if no manager present (e.g. isolated test scene)
+    }
+
+    // --- DEATH SYSTEM ---
+
+    // Called once by DeathManager right after this player is spawned, so the correct
+    // death pose / skeleton sprites for THIS variant are ready before they're ever needed.
+    public void SetVariantDeathAssets(Sprite deathPose, Sprite skeleton)
+    {
+        deathPoseSprite = deathPose;
+        skeletonSprite = skeleton;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (isDead) return;
+        if (((1 << collider.gameObject.layer) & ObstacleLayer) != 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        this.enabled = false; // stop all PlayerController logic (Update/FixedUpdate no longer run)
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static; // stays solid — this becomes the new ACTIVE corpse
+
+        // Release this object's input device pairing so the next spawned player can claim it.
+        // Without this, PlayerInput stays active on the corpse and blocks the new player's auto-pairing.
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        if (playerInput != null)
+            playerInput.enabled = false;
+
+        if (spriteRenderer != null && deathPoseSprite != null)
+            spriteRenderer.sprite = deathPoseSprite;
+
+        if (DeathManager.Instance != null)
+            DeathManager.Instance.PlayerDied(gameObject);
+    }
+
+    // Called by DeathManager when a newer corpse takes over as the active one.
+    public void RetireCorpse()
+    {
+        rb.simulated = false;              // fully remove from physics
+        if (col != null) col.enabled = false; // no more collision — purely visual now
+
+        if (spriteRenderer != null && skeletonSprite != null)
+            spriteRenderer.sprite = skeletonSprite;
     }
 }

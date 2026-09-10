@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9a6a5073163994280cccdc9065cd83, type: 3}
+  m_Name: SoundLibraly
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  entries:
+  - id: TitleBGM
+    clip: {fileID: 8300000, guid: ea3dcbb4947c51548bf3ccc65cc13c93, type: 3}
+    volumeScale: 1

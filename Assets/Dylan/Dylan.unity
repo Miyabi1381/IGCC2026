@@ -712,6 +712,7 @@ MonoBehaviour:
   GameCamera: {fileID: 2052567475}
   StaminaBarPosition: {fileID: 1727371459}
   StaminaBarDisplay: {fileID: 1942118699}
+  MaxCorpses: 7
   DoubleJumpUnlocked: 0
 --- !u!4 &650832628
 Transform:

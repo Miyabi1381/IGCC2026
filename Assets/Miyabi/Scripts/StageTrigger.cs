@@ -11,6 +11,7 @@ using Unity.Cinemachine;
 
 namespace MiyaLib
 {
+<<<<<<< HEAD
     public class StageTrigger : MonoBehaviour
     {
         // ライフサイクル関数 -----------------------------------------------------------
@@ -40,6 +41,26 @@ namespace MiyaLib
                 // 過去のキャッシュをクリアして、新しい部屋への移動を開始させる
                 cameraConfiner.InvalidateBoundingShapeCache();
             }
+=======
+	public class StageTrigger : MonoBehaviour
+	{
+		// メンバ変数 -------------------------------------------------------------------
+		[Tooltip("main camera is here")]
+		[SerializeField] private CinemachineConfiner2D cameraConfiner;
+		
+		// ライフサイクル関数 -----------------------------------------------------------
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.TryGetComponent<Collider2D>(out Collider2D roomCollider))
+            {
+                // カメラの制限エリアを、今入ったステージのコライダーに上書きする
+                cameraConfiner.BoundingShape2D = roomCollider;
+
+				// 過去のキャッシュをクリアして、新しい部屋への移動を開始させる
+				cameraConfiner.InvalidateBoundingShapeCache();
+            }
+
+>>>>>>> main
         }
 
         // 公開メンバ関数 ---------------------------------------------------------------

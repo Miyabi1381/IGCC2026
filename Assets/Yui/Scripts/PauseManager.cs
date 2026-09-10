@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
@@ -12,26 +11,18 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private Scrollbar bgmVolumeScrollbar;
     [SerializeField] private Scrollbar seVolumeScrollbar;
 
-    [Header("Audio")]
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private string exposedBgmVolumeParam = "BGM_Volume";
-    [SerializeField] private string exposedSeVolumeParam = "SE_Volume";
-    [SerializeField] private AudioSource seSampleSource; // SE調整時に試し鳴らしする場合に使用(任意)
-    [SerializeField] private AudioClip seSampleClip;      // 試し鳴らし用クリップ(任意)
-
     [Header("Scene")]
     [SerializeField] private string titleSceneName = "TitleScene";
 
     [Header("Input")]
     [SerializeField] private InputActionReference pauseActionReference;
 
+    [Header("SE Sample")]
+    [SerializeField] private AudioClip seSampleClip;
+    [SerializeField] private float seSampleDebounceSeconds = 0.15f;
+
     private InputAction pauseAction;
     private bool isPaused = false;
-    private const string BGM_VOLUME_PREF_KEY = "BGM_Volume";
-    private const string SE_VOLUME_PREF_KEY = "SE_Volume";
-
-    [Header("SE Sample Debounce")]
-    [SerializeField] private float seSampleDebounceSeconds = 0.15f; // 操作が止まってから再生までの待ち時間
     private Coroutine seSampleRoutine;
 
     private void Awake()
@@ -76,23 +67,28 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
-        // 保存済みのBGM/SE音量をそれぞれ復元
-        float savedBgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME_PREF_KEY, 0.75f);
-        float savedSeVolume = PlayerPrefs.GetFloat(SE_VOLUME_PREF_KEY, 0.75f);
-
-        if (bgmVolumeScrollbar != null)
+        if (SoundManager.Instance == null)
         {
-            bgmVolumeScrollbar.value = savedBgmVolume;
-            bgmVolumeScrollbar.onValueChanged.AddListener(SetBgmVolume);
+            Debug.LogWarning("PauseManager: SoundManager.Instance is null. Place a SoundManager in the first-loaded scene.");
         }
-        if (seVolumeScrollbar != null)
+        else
         {
-            seVolumeScrollbar.value = savedSeVolume;
-            seVolumeScrollbar.onValueChanged.AddListener(SetSeVolume);
+            if (bgmVolumeScrollbar != null)
+            {
+                bgmVolumeScrollbar.value = SoundManager.Instance.GetBgmVolume();
+                bgmVolumeScrollbar.onValueChanged.AddListener(OnBgmScrollbarChanged);
+            }
+            if (seVolumeScrollbar != null)
+            {
+                seVolumeScrollbar.value = SoundManager.Instance.GetSeVolume();
+                seVolumeScrollbar.onValueChanged.AddListener(OnSeScrollbarChanged);
+            }
         }
 
-        SetBgmVolume(savedBgmVolume);
-        SetSeVolume(savedSeVolume);
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("PauseManager: GameManager.Instance is null. Place a GameManager in the first-loaded scene.");
+        }
 
         pausePanel.SetActive(false);
         if (volumePanel != null) volumePanel.SetActive(false);
@@ -108,8 +104,13 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = true;
         pausePanel.SetActive(true);
-        Time.timeScale = 0f;          // ゲーム内時間を停止
-        AudioListener.pause = false;  // UI操作音などは鳴らしたい場合はfalseのまま
+        Time.timeScale = 0f; 
+
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("pause");
+            GameManager.Instance.SetPaused(true);
+        }
     }
 
     public void ResumeGame()
@@ -118,13 +119,19 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(false);
         if (volumePanel != null) volumePanel.SetActive(false);
         Time.timeScale = 1f;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.SetPaused(false);
+        }
     }
 
-    // 音量設定パネルを開く(ボタンのOnClickに割り当てる)
     public void OpenVolumeSettings()
     {
+        Debug.Log("OpenVolumeSetting");
         if (volumePanel != null) volumePanel.SetActive(true);
         pausePanel.SetActive(false);
+        Debug.Log("OpenVolumeSetting");
     }
 
     public void CloseVolumeSettings()
@@ -133,31 +140,19 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(true);
     }
 
-    // Scrollbarの値(0.0-1.0)をAudioMixerのdB値に変換して適用(BGM用)
-    public void SetBgmVolume(float linearValue)
+    private void OnBgmScrollbarChanged(float linearValue)
     {
-        float dB = linearValue > 0.0001f ? Mathf.Log10(linearValue) * 20f : -80f;
-        if (audioMixer != null)
-        {
-            audioMixer.SetFloat(exposedBgmVolumeParam, dB);
-        }
-        PlayerPrefs.SetFloat(BGM_VOLUME_PREF_KEY, linearValue);
-        PlayerPrefs.Save();
+        if (SoundManager.Instance == null) return;
+        SoundManager.Instance.SetBgmVolume(linearValue);
     }
 
-    // Scrollbarの値(0.0-1.0)をAudioMixerのdB値に変換して適用(SE用)
-    public void SetSeVolume(float linearValue)
+    private void OnSeScrollbarChanged(float linearValue)
     {
-        float dB = linearValue > 0.0001f ? Mathf.Log10(linearValue) * 20f : -80f;
-        if (audioMixer != null)
-        {
-            audioMixer.SetFloat(exposedSeVolumeParam, dB);
-        }
-        PlayerPrefs.SetFloat(SE_VOLUME_PREF_KEY, linearValue);
-        PlayerPrefs.Save();
+        if (SoundManager.Instance == null) return;
+        SoundManager.Instance.SetSeVolume(linearValue);
 
-        // ドラッグ中に大量再生されないよう、操作が止まってから1回だけ試し鳴らしする
-        if (seSampleSource != null && seSampleClip != null)
+        // ドラッグ中に大量再生されないよう、操作が止まってから1回だけ鳴らす
+        if (seSampleClip != null)
         {
             if (seSampleRoutine != null)
             {
@@ -169,16 +164,17 @@ public class PauseManager : MonoBehaviour
 
     private System.Collections.IEnumerator PlaySeSampleDebounced()
     {
-        // Time.timeScale = 0中(ポーズ中)でも待てるようUnscaledDeltaTimeで待機
         yield return new WaitForSecondsRealtime(seSampleDebounceSeconds);
-        seSampleSource.PlayOneShot(seSampleClip);
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySE(seSampleClip);
+        }
         seSampleRoutine = null;
     }
 
-    // タイトルシーンへ戻る(ボタンのOnClickに割り当てる)
     public void ReturnToTitle()
     {
-        Time.timeScale = 1f; // シーン遷移前に必ず時間を戻す
+        Time.timeScale = 1f; 
         SceneManager.LoadScene(titleSceneName);
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.Cinemachine;
 
 public class DeathManager : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class DeathManager : MonoBehaviour
     public Transform RespawnPoint;
 
     [Header("--- CAMERA ---")]
-    public CinemachineCamera GameCamera; // drag the CinemachineCamera object here
+    public CameraFollow GameCamera; // drag the camera holding CameraFollow.cs here
 
     [Header("--- STAMINA UI ---")]
     public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
@@ -64,9 +63,9 @@ public class DeathManager : MonoBehaviour
         if (controller != null && DoubleJumpUnlocked)
             controller.HasDoubleJumpUnlocked = true;
 
-        // Retarget the Cinemachine camera to follow whichever player is currently alive
+        // Retarget the camera to follow whichever player is currently alive
         if (GameCamera != null)
-            GameCamera.Follow = player.transform; // convenience alias for Target.TrackingTarget
+            GameCamera.SetTarget(player.transform);
 
         // Retarget the stamina bar's position-follow and its data source to the new player
         if (StaminaBarPosition != null)
@@ -102,7 +101,7 @@ public class DeathManager : MonoBehaviour
         }
 
         activeCorpse = corpse; // this new corpse is now the only collidable one
-        corpseHistory.Add(corpse); // track every corpse so we can trim the oldest later
+        corpseHistory.Add(corpse);
 
         TrimOldestCorpses();
 

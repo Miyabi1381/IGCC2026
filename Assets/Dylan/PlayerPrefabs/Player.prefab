@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2624918229994741202}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.63, z: 0}
+  m_LocalPosition: {x: 0, y: -1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 1381211098808679164}
   - component: {fileID: 2388639915294107293}
   - component: {fileID: 4752216166506665217}
+  - component: {fileID: -1310478375942920767}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -150,12 +151,12 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f7190b6d63830b847a5dd2e00baf1507, type: 3}
+  m_Sprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -179,7 +180,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0.5, y: 0.1}
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 264
+    m_Bits: 328
   WallCheck: {fileID: 2502854638900277482}
   wallCheckSize: {x: 0.1, y: 0.8}
   WallSlideSpeed: 2
@@ -198,6 +199,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   DebugKillKey: 1
+  JumpSprites:
+  - {fileID: 1520593526406683336, guid: bcba2a9ee1121a5418c824fa17e657fa, type: 3}
+  - {fileID: -2596014011498047723, guid: a2e2234dc53608649aca3785b3b02a29, type: 3}
+  WallClimbSprites:
+  - {fileID: -7196277206961665563, guid: 4c2d3dd0c151d6245809843fc7d52074, type: 3}
+  - {fileID: -8194122429286961087, guid: fa862248f4687204b8b389a7abe275f6, type: 3}
+  DashAvailableTint: {r: 1, g: 1, b: 1, a: 1}
+  DashUsedTint: {r: 0.34929863, g: 0.8195299, b: 0.89433956, a: 1}
+  JumpsFullTint: {r: 1, g: 1, b: 1, a: 1}
+  SingleJumpUsedTint: {r: 1, g: 0.5019608, b: 0.88425905, a: 1}
+  DoubleJumpAvailableFlashColor: {r: 1, g: 1, b: 1, a: 1}
+  DoubleJumpFlashSpeed: 10
 --- !u!61 &9137493616930787696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,17 +245,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007494211, y: -0.016895652}
+  m_Offset: {x: -0.007494211, y: -0.007058203}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.4, y: 3.2}
+    newSize: {x: 1.5, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5737, y: 2.5325525}
+  m_Size: {x: 2.5737, y: 3.1818361}
   m_EdgeRadius: 0
 --- !u!50 &1381211098808679164
 Rigidbody2D:
@@ -313,3 +326,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88da06104d7138e4fabffcb3f0a70e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiyaLib.StageTrigger
+--- !u!95 &-1310478375942920767
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654146131017544287}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3de35f78d74a3d943bd5c31ad29ed2d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

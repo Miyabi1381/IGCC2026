@@ -53,6 +53,23 @@ public class PlayerController : MonoBehaviour
     [Header("--- DEBUG ---")]
     public bool DebugKillKey = true; // toggle off before a real build
 
+    [Header("--- ANIMATION ---")]
+    private Animator PlayerAnim;
+
+    [Header("--- RANDOM POSE VARIANTS ---")]
+    public Sprite[] JumpSprites;       // e.g. jamp1, jamp2 — one picked at random each time you leave the ground
+    public Sprite[] WallClimbSprites;  // e.g. wallwalk1, wallwalk2 — one picked at random each time you grab a wall
+    private bool wasAirborneForJumpPose = false;
+    private bool wasClimbingForPose = false;
+
+    [Header("--- RESOURCE TINT INDICATORS ---")]
+    public Color DashAvailableTint = Color.white;
+    public Color DashUsedTint = new Color(0.3f, 0.55f, 1f, 1f);        // blue while dash is spent
+    public Color JumpsFullTint = Color.white;                          // grounded / haven't jumped yet
+    public Color SingleJumpUsedTint = new Color(0.85f, 0.7f, 1f, 1f);  // light purple after the first jump
+    public Color DoubleJumpAvailableFlashColor = Color.white;          // peak color the flash oscillates toward
+    public float DoubleJumpFlashSpeed = 6f;                            // higher = faster flicker
+
     // --- PRIVATE INTERNAL STATES ---
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -80,6 +97,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
+        PlayerAnim = GetComponentInChildren<Animator>();
         currentStamina = MaxClimbStamina;
 
         if (DeathManager.Instance != null)
@@ -93,6 +111,8 @@ public class PlayerController : MonoBehaviour
         DetermineMovementStates();
         HandleStaminaDecay();
         HandleJumpBuffer();
+        HandleAnimationAndPoseState(); // drives Idle/Walk via Animator, and Jump/WallClimb via direct sprite override
+        ApplyResourceTint(); // colors the sprite based on dash/jump resource usage
 
         if (!isDashing && !isClimbing)
         {
@@ -108,6 +128,49 @@ public class PlayerController : MonoBehaviour
         if (DebugKillKey && Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
         {
             Die();
+        }
+    }
+
+    // Handles three visual states:
+    // - Wall climbing: picks a random pose once per grab, Animator disabled so it can't fight the override
+    // - Airborne (jumping/falling, not climbing): picks a random pose once per takeoff, Animator disabled
+    // - Grounded, not climbing: normal Animator-driven Idle/Walk, re-enabled if it was off
+    private void HandleAnimationAndPoseState()
+    {
+        if (isClimbing)
+        {
+            if (!wasClimbingForPose && WallClimbSprites != null && WallClimbSprites.Length > 0)
+            {
+                spriteRenderer.sprite = WallClimbSprites[Random.Range(0, WallClimbSprites.Length)];
+            }
+
+            if (PlayerAnim != null) PlayerAnim.enabled = false;
+            wasClimbingForPose = true;
+            wasAirborneForJumpPose = false; // reset so a fresh jump after letting go picks a new pose
+        }
+        else if (!isGrounded)
+        {
+            if (!wasAirborneForJumpPose && JumpSprites != null && JumpSprites.Length > 0)
+            {
+                spriteRenderer.sprite = JumpSprites[Random.Range(0, JumpSprites.Length)];
+            }
+
+            if (PlayerAnim != null) PlayerAnim.enabled = false;
+            wasAirborneForJumpPose = true;
+            wasClimbingForPose = false;
+        }
+        else
+        {
+            // Grounded and not climbing — hand control back to the Animator for Idle/Walk
+            if (PlayerAnim != null)
+            {
+                PlayerAnim.enabled = true;
+                bool isMoving = fullMoveInput.magnitude > 0;
+                PlayerAnim.SetBool("isWalking", isMoving);
+            }
+
+            wasAirborneForJumpPose = false;
+            wasClimbingForPose = false;
         }
     }
 
@@ -177,6 +240,36 @@ public class PlayerController : MonoBehaviour
                 isExhausted = true; // Forcibly drops the hold state
             }
         }
+    }
+
+    // Colors the sprite to reflect resource state: dash availability and jump count used.
+    // Dash and jump tints are computed independently, then multiplied together — so both
+    // states can be reflected at once (e.g. dash used while airborne) without needing a
+    // separate color defined for every possible combination.
+    private void ApplyResourceTint()
+    {
+        Color dashTint = canDash ? DashAvailableTint : DashUsedTint;
+
+        Color jumpTint;
+        if (isGrounded)
+        {
+            jumpTint = JumpsFullTint;
+        }
+        else if (!isDoubleJump && HasDoubleJumpUnlocked)
+        {
+            // Airborne, haven't used the double jump yet, and it's available — flash to signal
+            // the player still has a second jump in reserve, oscillating between purple and the flash color.
+            float t = (Mathf.Sin(Time.time * DoubleJumpFlashSpeed) + 1f) * 0.5f; // 0..1 oscillation
+            jumpTint = Color.Lerp(SingleJumpUsedTint, DoubleJumpAvailableFlashColor, t);
+        }
+        else
+        {
+            // Either double jump already used, or the ability isn't unlocked at all — solid, no flash.
+            jumpTint = SingleJumpUsedTint;
+        }
+
+        if (spriteRenderer != null)
+            spriteRenderer.color = dashTint * jumpTint; // Color * Color multiplies component-wise
     }
 
     private void HandleHorizontalAndClimbMovement()
@@ -378,5 +471,13 @@ public class PlayerController : MonoBehaviour
 
         if (spriteRenderer != null && skeletonSprite != null)
             spriteRenderer.sprite = skeletonSprite;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        if (GroundCheck != null) Gizmos.DrawWireCube(GroundCheck.position, groundCheckSize);
+        Gizmos.color = Color.blue;
+        if (WallCheck != null) Gizmos.DrawWireCube(WallCheck.position, wallCheckSize);
     }
 }

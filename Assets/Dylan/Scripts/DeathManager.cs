@@ -21,7 +21,7 @@ public class DeathManager : MonoBehaviour
     public Transform RespawnPoint;
 
     [Header("--- CAMERA ---")]
-    public CameraFollow GameCamera; // drag the camera holding CameraFollow.cs here
+    public CinemachineCamera GameCamera;
 
     [Header("--- STAMINA UI ---")]
     public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
@@ -64,9 +64,9 @@ public class DeathManager : MonoBehaviour
         if (controller != null && DoubleJumpUnlocked)
             controller.HasDoubleJumpUnlocked = true;
 
-        // Retarget the camera to follow whichever player is currently alive
+        // Retarget the Cinemachine camera to follow whichever player is currently alive
         if (GameCamera != null)
-            GameCamera.SetTarget(player.transform);
+            GameCamera.Follow = player.transform; // convenience alias for Target.TrackingTarget
 
         // Retarget the stamina bar's position-follow and its data source to the new player
         if (StaminaBarPosition != null)

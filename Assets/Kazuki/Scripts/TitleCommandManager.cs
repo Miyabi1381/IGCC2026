@@ -51,7 +51,7 @@ public class TitleCommandManager : MonoBehaviour
         if(isChanged)
         {
             timer = 0.0f;
-            textActive = false;
+            textActive = true;
         }
         for (int i = 0; i < COMMAND_MAX; i++)
         {

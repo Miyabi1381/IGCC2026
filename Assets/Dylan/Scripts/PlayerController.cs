@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("--- ANIMATION ---")]
     private Animator PlayerAnim;
+    public Sprite BodySprite;
 
     [Header("--- RANDOM POSE VARIANTS ---")]
     public Sprite[] JumpSprites;       // e.g. jamp1, jamp2 — one picked at random each time you leave the ground
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
     // --- PUBLIC ACCESSORS (for UI / external systems) ---
     public float StaminaPercent => currentStamina / MaxClimbStamina;
     public bool IsClimbing => isClimbing;
+    public bool IsGrounded => isGrounded; // used by checkpoint placement, so "connected to ground" means the same thing it means everywhere else
 
     void Start()
     {
@@ -161,12 +163,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Grounded and not climbing — hand control back to the Animator for Idle/Walk
+            // Grounded and not climbing
             if (PlayerAnim != null)
             {
-                PlayerAnim.enabled = true;
                 bool isMoving = fullMoveInput.magnitude > 0;
-                PlayerAnim.SetBool("isWalking", isMoving);
+
+                if (isMoving)
+                {
+                    // Walking → let Animator control the sprite
+                    PlayerAnim.enabled = true;
+                    PlayerAnim.SetBool("isWalking", true);
+                }
+                else
+                {
+                    // Idle → stop Animator from replacing the variant sprite
+                    PlayerAnim.enabled = false;
+                }
             }
 
             wasAirborneForJumpPose = false;
@@ -371,6 +383,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Places a checkpoint at the player's current position — only allowed while grounded,
+    // reusing the same GroundLayer overlap check already driving normal movement (isGrounded),
+    // so "connected to the ground" means exactly what it already means everywhere else in the script.
+    public void OnPlaceCheckpoint(InputValue value)
+    {
+        if (!value.isPressed) return;
+        if (isDead) return;
+
+        if (!isGrounded)
+        {
+            Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
+            return;
+        }
+
+        if (DeathManager.Instance != null)
+            DeathManager.Instance.SetCheckpoint(transform.position);
+    }
+
     private IEnumerator PerformCelesteDash()
     {
         canDash = false;
@@ -422,6 +452,18 @@ public class PlayerController : MonoBehaviour
     {
         deathPoseSprite = deathPose;
         skeletonSprite = skeleton;
+    }
+
+    public void SetVariantAnimationAssets(
+        AnimatorOverrideController animatorOverride,
+        Sprite[] jumpSprites,
+        Sprite[] wallClimbSprites)
+    {
+        if (PlayerAnim != null && animatorOverride != null)
+            PlayerAnim.runtimeAnimatorController = animatorOverride;
+
+        JumpSprites = jumpSprites;
+        WallClimbSprites = wallClimbSprites;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

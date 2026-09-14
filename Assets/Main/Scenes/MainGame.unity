@@ -6257,35 +6257,100 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DeathManager
   PlayerPrefab: {fileID: 7654146131017544287, guid: a76b1347567a77648b544f5b92536c53, type: 3}
   PlayerVariants:
-  - Name: Player1
+  - Name: Blue Shiba
     BodySprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
-    DeathPoseSprite: {fileID: 21300000, guid: 81fa0020ab73e0e49b146326b9acbe16, type: 3}
-    SkeletonSprite: {fileID: 21300000, guid: 1c1b0ca74d3702a44ba78aecdf610118, type: 3}
+    DeathPoseSprite: {fileID: 9107380751157506149, guid: ece9f66035c4c8746ab6b497d839e95e, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
     Scale: {x: 0.38, y: 0.38, z: 0.38}
-  - Name: Player2
-    BodySprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
-    DeathPoseSprite: {fileID: 21300000, guid: 81fa0020ab73e0e49b146326b9acbe16, type: 3}
-    SkeletonSprite: {fileID: 21300000, guid: 1c1b0ca74d3702a44ba78aecdf610118, type: 3}
+    AnimatorOverride: {fileID: 22100000, guid: 532c0f54079e4cb43a2c62f028cb1da3, type: 2}
+    JumpSprites:
+    - {fileID: -6805171200405264597, guid: cbe423f5766ad0448bc0eaa4bbc62e50, type: 3}
+    - {fileID: 2784996534285262263, guid: 15e31f92dfd638d4aa627962851bd9b1, type: 3}
+    WallClimbSprites:
+    - {fileID: -5110732241193560832, guid: 95f322f98f466494291634d04a4bd6e8, type: 3}
+    - {fileID: 8342514838353682252, guid: 8f0a851d6756e8e43a2a2ef03a7cca84, type: 3}
+  - Name: Red Bear
+    BodySprite: {fileID: -5490839247628895407, guid: b92606da7729fe3488f902071439ebee, type: 3}
+    DeathPoseSprite: {fileID: 1688827588019505007, guid: 44bcd07f13819c24ea7ae113feaa7cd8, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
     Scale: {x: 0.38, y: 0.38, z: 0.38}
-  - Name: Player3
-    BodySprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
-    DeathPoseSprite: {fileID: 21300000, guid: 81fa0020ab73e0e49b146326b9acbe16, type: 3}
-    SkeletonSprite: {fileID: 21300000, guid: 1c1b0ca74d3702a44ba78aecdf610118, type: 3}
+    AnimatorOverride: {fileID: 22100000, guid: 3bfba171c2f68f049ae71dbea11f3b0d, type: 2}
+    JumpSprites:
+    - {fileID: -512548249657264980, guid: 08020ad861aff244ca5b0220c6781e7f, type: 3}
+    - {fileID: 8349577451863320869, guid: 9aa88f20ddeb9604b87b5d85d9fcfb7a, type: 3}
+    WallClimbSprites:
+    - {fileID: 365810057836644473, guid: 02c4e8e9036cee941aabeaa2214f4804, type: 3}
+    - {fileID: 2431140982584053005, guid: 12fe4671b2e8f4f45a9e1fdd0396d5fa, type: 3}
+  - Name: Green Eagle
+    BodySprite: {fileID: -4874664902315501132, guid: 0bc45926c0a94fe4d99fda73964dd0fa, type: 3}
+    DeathPoseSprite: {fileID: 6689554325063173343, guid: 74b734f2d617a1146ad6ac374e419d3f, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
     Scale: {x: 0.38, y: 0.38, z: 0.38}
-  - Name: Player4
-    BodySprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
-    DeathPoseSprite: {fileID: 21300000, guid: 81fa0020ab73e0e49b146326b9acbe16, type: 3}
-    SkeletonSprite: {fileID: 21300000, guid: 1c1b0ca74d3702a44ba78aecdf610118, type: 3}
+    AnimatorOverride: {fileID: 22100000, guid: f15c9d02e4ab44540954d0b16f6147d9, type: 2}
+    JumpSprites:
+    - {fileID: 4970800877803549478, guid: 753b54a18d5c2824c9d7ecdce98a266a, type: 3}
+    - {fileID: -2036290167098398212, guid: dcbefea7d71a3c1459e2b67c786ecedf, type: 3}
+    WallClimbSprites:
+    - {fileID: -5154527541400376380, guid: fa95a5e426d00db4091b8183349fc8c8, type: 3}
+    - {fileID: -8683153193613243290, guid: b9492f456d36b8048bf0ffe8414923c0, type: 3}
+  - Name: Pink Elephant
+    BodySprite: {fileID: 8865607529052762427, guid: de5f5a3b1dbbb0f458f22761b4f92d47, type: 3}
+    DeathPoseSprite: {fileID: -4017859070356891816, guid: 87587e8e3d514764285a1555081ebb91, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
     Scale: {x: 0.38, y: 0.38, z: 0.38}
+    AnimatorOverride: {fileID: 22100000, guid: 80f2ff4f71ee21b4d8231829ee53d6c1, type: 2}
+    JumpSprites:
+    - {fileID: 6805209488979156676, guid: 164b4d4c96b1fa1499900f4d05fd73e8, type: 3}
+    - {fileID: -6250139594751266503, guid: cd07269991ed92046b6ff0a07195a1a5, type: 3}
+    WallClimbSprites:
+    - {fileID: 463619523376738719, guid: 7358d139ef206b74782c905d1ceb4d5c, type: 3}
+    - {fileID: -6352940431101020362, guid: 4be443ce3ac29534faf91bdcadfd7ccd, type: 3}
+  - Name: Purple Otter
+    BodySprite: {fileID: -3330385848378945896, guid: 7ddb0797b50754e46bcb3319f4398add, type: 3}
+    DeathPoseSprite: {fileID: 7297051319282017804, guid: 02f931dd9ae645e419bf2ddd9b038ee8, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
+    Scale: {x: 0.38, y: 0.38, z: 0.38}
+    AnimatorOverride: {fileID: 22100000, guid: 16ce14c3be86e754d96d711ce78b3eed, type: 2}
+    JumpSprites:
+    - {fileID: -3330881105543539720, guid: 4c18efdf453c11d41a14d21de8292af9, type: 3}
+    - {fileID: 987387341346710391, guid: 599ad98450a34dc4fba22e216be1c43c, type: 3}
+    WallClimbSprites:
+    - {fileID: -5370930696146697590, guid: bab652140e83e6e4c8a94f6c8daadbdc, type: 3}
+    - {fileID: -5479847405421966616, guid: 03c3035eb6806c54bbbe4a48a2543f62, type: 3}
+  - Name: Yellow Bear
+    BodySprite: {fileID: 8402494086330101768, guid: 19df5b006594119488c6137826df727d, type: 3}
+    DeathPoseSprite: {fileID: 3494832739357088897, guid: 0c8a6780bd000c94c881b6c6bfa88676, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
+    Scale: {x: 0.38, y: 0.38, z: 0.38}
+    AnimatorOverride: {fileID: 22100000, guid: 91105e1a0da7bb8499ef8588065ec00f, type: 2}
+    JumpSprites:
+    - {fileID: 1052541219238659347, guid: b84fe5e9c39a28345b7182f6bb8c69ef, type: 3}
+    - {fileID: -46369653467891239, guid: 817166e57a2ad024d806a4eef324d555, type: 3}
+    WallClimbSprites:
+    - {fileID: 8850770086952781453, guid: eece9fa377eece241b3a69f10b0ad644, type: 3}
+    - {fileID: 8817028971286861261, guid: d556e85a9d9e3a74aa9f7adabd4bfc93, type: 3}
+  - Name: Red Shiba
+    BodySprite: {fileID: -4043197753297592265, guid: 2f89e86c0a135ec4496ad8e84f24d5a8, type: 3}
+    DeathPoseSprite: {fileID: 1815140313512678560, guid: 70060d6bb33f13d459a43861b6092cac, type: 3}
+    SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
+    Scale: {x: 0.38, y: 0.38, z: 0.38}
+    AnimatorOverride: {fileID: 22100000, guid: 72ca92c32a3c339488d64d8cccdb0954, type: 2}
+    JumpSprites:
+    - {fileID: -5052469487710062219, guid: 3e08b935a30ec6d408d5946128156bda, type: 3}
+    - {fileID: 3573620358591058884, guid: 78c19e9243d5e8443a53977e0c214860, type: 3}
+    WallClimbSprites:
+    - {fileID: 6205249404066307987, guid: e377fef7b7c16fb4c9b84ea546c42df2, type: 3}
+    - {fileID: 2816694289267662072, guid: e8fb84f38069ea644ba540b1f7b6d5c5, type: 3}
   RespawnPoint: {fileID: 824546093}
+  CheckpointMarkerPrefab: {fileID: 6257321546655093026, guid: 2fdc011cc06c6ab41ab212dc596a06f0, type: 3}
   GameCamera: {fileID: 1706401096}
   StaminaBarPosition: {fileID: 314294563}
   StaminaBarDisplay: {fileID: 1257011318}
   MaxCorpses: 7
   DoubleJumpUnlocked: 0
+  CurrentOfferings: 0
   OfferingPickupPrefab: {fileID: 538939379160329976, guid: 5da96faf4cd8bd849b3ce44eb1756758, type: 3}
   DropScatterRadius: 2
-  MinDropSpacing: 0.4
   SolidLayer:
     serializedVersion: 2
     m_Bits: 200

@@ -10,16 +10,30 @@ public class DeathManager : MonoBehaviour
     public class PlayerVariant
     {
         public string Name; // just for readability in the Inspector list
+
+        [Header("--- VISUALS ---")]
         public Sprite BodySprite;
         public Sprite DeathPoseSprite;
         public Sprite SkeletonSprite;
-        public Vector3 Scale = Vector3.one; // per-variant fix for mismatched sprite sizes
+        public Vector3 Scale = Vector3.one;
+
+        [Header("--- ANIMATION ---")]
+        public AnimatorOverrideController AnimatorOverride;
+
+        [Header("--- RANDOM POSES ---")]
+        public Sprite[] JumpSprites;
+        public Sprite[] WallClimbSprites;
     }
 
     [Header("--- PLAYER SETUP ---")]
     public GameObject PlayerPrefab;         // ONE base prefab, shared physics/logic
     public PlayerVariant[] PlayerVariants;  // each entry bundles body/death/skeleton sprites + scale
-    public Transform RespawnPoint;
+    public Transform RespawnPoint;          // fallback spawn location, used only before any checkpoint is placed
+
+    [Header("--- CHECKPOINTS ---")]
+    public GameObject CheckpointMarkerPrefab; // optional visual (flag, glow, etc.) shown at the active checkpoint
+    private GameObject currentCheckpointMarker;
+    private Vector3? currentCheckpointPosition = null; // null = no checkpoint placed yet, use RespawnPoint
 
     [Header("--- CAMERA ---")]
     public CinemachineCamera GameCamera;
@@ -62,6 +76,20 @@ public class DeathManager : MonoBehaviour
     public CinemachineConfiner2D GetCameraConfiner()
     {
         return GameCamera != null ? GameCamera.GetComponent<CinemachineConfiner2D>() : null;
+    }
+
+    // Called by PlayerController when a checkpoint is successfully placed. Replaces whatever
+    // checkpoint was active before — only one can exist at a time, so the old marker is
+    // destroyed and the new position takes over as the respawn location going forward.
+    public void SetCheckpoint(Vector3 position)
+    {
+        if (currentCheckpointMarker != null)
+            Destroy(currentCheckpointMarker);
+
+        currentCheckpointPosition = position;
+
+        if (CheckpointMarkerPrefab != null)
+            currentCheckpointMarker = Instantiate(CheckpointMarkerPrefab, position, Quaternion.identity);
     }
 
     public void RegisterPlayer(GameObject player)
@@ -198,13 +226,23 @@ public class DeathManager : MonoBehaviour
             return;
         }
 
-        if (RespawnPoint == null)
+        // Use the placed checkpoint if one exists, otherwise fall back to the original RespawnPoint.
+        Vector3 spawnPosition;
+        if (currentCheckpointPosition.HasValue)
         {
-            Debug.LogWarning("DeathManager: No RespawnPoint assigned.");
+            spawnPosition = currentCheckpointPosition.Value;
+        }
+        else if (RespawnPoint != null)
+        {
+            spawnPosition = RespawnPoint.position;
+        }
+        else
+        {
+            Debug.LogWarning("DeathManager: No checkpoint placed and no RespawnPoint assigned.");
             return;
         }
 
-        GameObject newPlayer = Instantiate(PlayerPrefab, RespawnPoint.position, Quaternion.identity);
+        GameObject newPlayer = Instantiate(PlayerPrefab, spawnPosition, Quaternion.identity);
         currentPlayer = newPlayer;
 
         // Apply the next variant's full look — body sprite, matching death/skeleton sprites, and scale —
@@ -215,14 +253,35 @@ public class DeathManager : MonoBehaviour
         {
             PlayerVariant variant = PlayerVariants[deathCount % PlayerVariants.Length];
 
+            // --- BODY SPRITE ---
             SpriteRenderer sr = newPlayer.GetComponent<SpriteRenderer>();
+
             if (sr != null && variant.BodySprite != null)
                 sr.sprite = variant.BodySprite;
 
+            // --- SCALE ---
             newPlayer.transform.localScale = variant.Scale;
 
+            // --- DEATH / SKELETON SPRITES ---
             if (controller != null)
-                controller.SetVariantDeathAssets(variant.DeathPoseSprite, variant.SkeletonSprite);
+                controller.SetVariantDeathAssets(
+                    variant.DeathPoseSprite,
+                    variant.SkeletonSprite
+                );
+
+            // --- ANIMATION OVERRIDE ---
+            Animator animator = newPlayer.GetComponentInChildren<Animator>();
+
+            if (animator != null && variant.AnimatorOverride != null)
+                animator.runtimeAnimatorController = variant.AnimatorOverride;
+
+            // --- JUMP / WALL CLIMB SPRITES ---
+            if (controller != null)
+            {
+                controller.BodySprite = variant.BodySprite;
+                controller.JumpSprites = variant.JumpSprites;
+                controller.WallClimbSprites = variant.WallClimbSprites;
+            }
         }
 
         // Register immediately rather than waiting for newPlayer's own Start() — Start() is deferred

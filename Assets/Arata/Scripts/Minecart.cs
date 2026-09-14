@@ -204,11 +204,24 @@ public class MinecartEditor : Editor
         if (GUILayout.Button("Add point", GUILayout.Height(25)))
         {
             Undo.RecordObject(route, "Add Waypoint");
-            // 追加時の初期位置を (0,0) にすることで、オブジェクトの中心が原点になる
+
+            // 追加するポイントの初期座標と角度
+            Vector2 newPos = Vector2.zero;
+            Vector3 newRot = Vector3.zero;
+
+            // 既にウェイポイントが存在する場合は、最後のポイントの位置と角度を引き継ぐ
+            if (route.waypoints.Count > 0)
+            {
+                Waypoint lastPoint = route.waypoints[route.waypoints.Count - 1];
+                newPos = lastPoint.position;
+                newRot = lastPoint.eulerAngles;
+            }
+
+            // 新しいポイントを追加
             route.waypoints.Add(new Waypoint
             {
-                position = Vector2.zero,
-                eulerAngles = Vector3.zero
+                position = newPos,
+                eulerAngles = newRot
             });
         }
         GUI.backgroundColor = Color.white;

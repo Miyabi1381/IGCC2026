@@ -18,17 +18,13 @@ public class Rockfall : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 衝突したオブジェクトがGroundレイヤーの場合、岩を破壊する
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        // プレハブが設定されていれば、岩の現在位置にエフェクトを生成する
+        if (breakEffectPrefab != null)
         {
-            // プレハブが設定されていれば、岩の現在位置にエフェクトを生成する
-            if (breakEffectPrefab != null)
-            {
-                Instantiate(breakEffectPrefab, transform.position, Quaternion.identity);
-            }
-
-            // 岩のオブジェクトを破壊する
-            Destroy(gameObject);
+            Instantiate(breakEffectPrefab, transform.position, Quaternion.identity);
         }
+
+        // 岩のオブジェクトを破壊する
+        Destroy(gameObject);
     }
 }

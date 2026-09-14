@@ -170,3 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rockfall
   breakEffectPrefab: {fileID: 8958433031325988183, guid: 5483e1ef511807746b08956d331011f6, type: 3}
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295

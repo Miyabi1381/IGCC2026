@@ -1,0 +1,2603 @@
+fileFormatVersion: 2
+guid: 8182d38ac5b76284082c92a8ad84f7c2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1292619128988044281
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_0"
+  - first:
+      213: -2418954668836508222
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_1"
+  - first:
+      213: -2893327348643357338
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_2"
+  - first:
+      213: 7045041193267064179
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_3"
+  - first:
+      213: -7885578273454458854
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_4"
+  - first:
+      213: 3997312698977481160
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_5"
+  - first:
+      213: -6994922916730879037
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_6"
+  - first:
+      213: 4785643260114148442
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_7"
+  - first:
+      213: 7137414885138995830
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_8"
+  - first:
+      213: 5790961457684827497
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_9"
+  - first:
+      213: -4565925444848983919
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_10"
+  - first:
+      213: -599965916843730032
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_11"
+  - first:
+      213: 799713257896960343
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_12"
+  - first:
+      213: 4240705340449841021
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_13"
+  - first:
+      213: -3599926377820497934
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_14"
+  - first:
+      213: -7033775861909404300
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_15"
+  - first:
+      213: 186461086176538127
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_16"
+  - first:
+      213: -2291548302639714994
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_17"
+  - first:
+      213: 1696546756791762387
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_18"
+  - first:
+      213: 4051586462485616814
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_19"
+  - first:
+      213: -5478719268614880816
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_20"
+  - first:
+      213: 5748706248550986760
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_21"
+  - first:
+      213: 4567164456712614958
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_22"
+  - first:
+      213: -3874598532327503523
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_23"
+  - first:
+      213: -4092870834930308604
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_24"
+  - first:
+      213: -401040091078911462
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_25"
+  - first:
+      213: 8127749782105403666
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_26"
+  - first:
+      213: -1098610669586218214
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_27"
+  - first:
+      213: 6273708138250798600
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_28"
+  - first:
+      213: 1417657009423328597
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_29"
+  - first:
+      213: -6858051798429239866
+    second: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_30"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_0"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fb053dcf3e40f110800000000000000
+      internalID: 1292619128988044281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_20"
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd2a3c7b852e6ed0800000000000000
+      internalID: -2418954668836508222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_35"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66d903d1b16d8d7d0800000000000000
+      internalID: -2893327348643357338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_36"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37d6da893a305c160800000000000000
+      internalID: 7045041193267064179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_15"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 190ebdccff292a0c0800000000000000
+      internalID: -4565925444848983919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_44"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4da28bb5f8c230e0800000000000000
+      internalID: -2291548302639714994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_26"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 211b6a93d519bc070800000000000000
+      internalID: 8127749782105403666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_27"
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a130cdcaa63f0c0f0800000000000000
+      internalID: -1098610669586218214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_30"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5756f893e43d0a0800000000000000
+      internalID: -6858051798429239866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_1"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01ec8e6c1dc12d746a2ad703c67a3c05
+      internalID: 1508790467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_2"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee0ea695d3d58d34d9b841e3736eb7a0
+      internalID: 1790605501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_3"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0376ab4e230f1049993392b3c581db0
+      internalID: 1435553945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_4"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c44ec75b8499c504e93bdfc1921c0e2b
+      internalID: -7885578273454458854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_5"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e2314138cc0cf74eb36d3d8066b1678
+      internalID: 3997312698977481160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_6"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 724c68ff4e378764cb4570253e129d71
+      internalID: -6994922916730879037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_7"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751673dd45966f8419d861b1f70488ac
+      internalID: 4785643260114148442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_8"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b275acb4a9411e419930eec5651a0ef
+      internalID: 7137414885138995830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_9"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5624fdb25399cf148b6d89ebe2f76010
+      internalID: 5790961457684827497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_10"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9db7db38bdab8024b8e62847bc9944d7
+      internalID: -1490277726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_11"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2027d83a728e6af48bffa85e0b2c5541
+      internalID: -599965916843730032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_25"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a86f49a4c75532145a189abcdf9deb95
+      internalID: -401040091078911462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_12"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435544583dcacaf498439dc813d3ee38
+      internalID: 799713257896960343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_13"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3454429b2ecb131419485439a6159b11
+      internalID: 4240705340449841021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_14"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00c37979bcf68fb43847f975cc89b51e
+      internalID: -3599926377820497934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_16"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b29bac16c7020154eb40586c65fc0177
+      internalID: 186461086176538127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_17"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07734c08ff6a045429165cf3b08b88ca
+      internalID: -1979318442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_18"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2028aaffc18fe4da0d175e4e0143eb
+      internalID: 1696546756791762387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_19"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb67809492931b49b4ba8dd3b0b22f9
+      internalID: 4051586462485616814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_38"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88395474b7c3be40b7604885409677f
+      internalID: 1925886832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_37"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531a663709571354c8d777462ff40786
+      internalID: -326676769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_39"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82c5e7649254ec48bff4297b0064e50
+      internalID: 313137553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_40"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0e2313e926087e45829a60995cbfd96
+      internalID: 1888964450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_21"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc7fced9a7cf28f4aa342d0df235e9bf
+      internalID: 5748706248550986760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_22"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa8ab4a06ede6e4db47b3abd47fbcd6
+      internalID: 4567164456712614958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_23"
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8a0f132c5187d4bb8caedae49dd71b
+      internalID: -3874598532327503523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_24"
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd04d803c7304741b26952cd1153d10
+      internalID: -4092870834930308604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_28"
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9571154a633e9c42bda99f474d4f1c0
+      internalID: 6273708138250798600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_29"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c145f83022db8b040b08b452d4e2c2df
+      internalID: 1417657009423328597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_32"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4c14c7551c52d242bc501a08ad2c5d5
+      internalID: -1514028722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_31"
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5ea988d40446b241ac5ccc723b52318
+      internalID: 1547276778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_33"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522e5fe5eca34504ea8c9095b6215379
+      internalID: -1700459646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_34"
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7354ac8a274484491c502eb1f8b75e
+      internalID: -74966324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_41"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86558fc78927efa4d9d2845a987da1aa
+      internalID: 299491488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_42"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5027cf923c8354349a02dda8960273e8
+      internalID: -2113597954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_43"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef671cc552726d5488481bf354407026
+      internalID: -851398426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_45"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96dfea9fab2b7444c92acc0195655d30
+      internalID: 483285354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_46"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3f122482b65dd241a2aebd296dd1a6d
+      internalID: -1203695608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_47"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf4759ff25158b4c9e3b18f2438affd
+      internalID: -419840882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_48"
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ab311f75b2725b428dfc78a380fd731
+      internalID: 1063786283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_49"
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1941436ad0359aa4a9eac4f79010ed24
+      internalID: 214816651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_50"
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f09d8b59dd72543af779ca3994ff17
+      internalID: -2083022295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_51"
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e3d74dee89b1747821ce891ed7412e
+      internalID: -284579635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_52"
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23a10428abe18640a11451842c459c4
+      internalID: 203193223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_53"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc72df9c1fb1354c80b2a47ce8a0dc1
+      internalID: 1092363124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_54"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a98b3b6d08ef0042bf128cba285622f
+      internalID: -109266662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_55"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da507a7ccdf41b34e8afe2d8c7446a10
+      internalID: -975703569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_56"
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10797c28dd800ab499331f53b1319c33
+      internalID: -1440003986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_57"
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84964279713c759498d6c23150aeec4f
+      internalID: 1526127735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_58"
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68cb9b572b52a37468088b945462324d
+      internalID: 2057994503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_59"
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14bf394b0b2c56846adba1d9fc1b2ffe
+      internalID: -1384117700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_60"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1a9f3f936b9d544d94f517e6142d1aa
+      internalID: 1871496602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_61"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228943c458449cd42811be3b8f70530a
+      internalID: 51438597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_62"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc228630bb921e418762cb3b3617173
+      internalID: -994589455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_63"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b467d8f7e32244fbe56f6ea548ed03
+      internalID: 683475897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_64"
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 478a8b43bf4a6474bab8ae6eb4315f6f
+      internalID: -36252141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_65"
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 474d7fcc71d32974e8ed577b7f701655
+      internalID: -1274275342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_66"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435bfa03f3df74240bb9b68464043923
+      internalID: -1361728027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_67"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebb4f5d00eeff2348a4f33e15582a3f0
+      internalID: 679368123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_68"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8751248d0563db4ba1d5fa8752ef54f
+      internalID: -1230014167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_69"
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17ca1e340ba0ef64fbb34aae2fde0560
+      internalID: 484279276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_70"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5da12c9f5bace2f429463d55da007dda
+      internalID: -118970141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_71"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93f7e84588011a94797d73e3440c2aa7
+      internalID: 228062146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_72"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efd7cac110473ad46a81bd3613f3b53b
+      internalID: 154001480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_73"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4ba2eeba03fd44a8171ea55ed0aabe
+      internalID: -1278906611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_74"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6973a205e1f008b468a7343f555ce144
+      internalID: 207377435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_75"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee19392961618d49b92d30194638a95
+      internalID: 1990374058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_76"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f7ba93d0d4db94ebd1b144e619cfaa
+      internalID: 2002656478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_77"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21f0a09081e57cd48a70e56fe3fc1798
+      internalID: -729431740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_78"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5691d5eb3d408447a5034bbe1c08d3b
+      internalID: -2038503176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_79"
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632812805d9792a429b9230b3d1de270
+      internalID: 1955404298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_80"
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9347f938a0660045a28e517c925b9bf
+      internalID: -94209663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_81"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4c02a5e3ffff3c43bc24d82776f2224
+      internalID: -2053195135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_82"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 583f9e8731e8bfe4fb3cf5bf8dfe0961
+      internalID: 59744201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_83"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f70e62937d65a744bb45a9648f6846f
+      internalID: -139016451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_84"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36dafab5cfa1d345b878149c4680b0c
+      internalID: 524862679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_85"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b51c1ed0f2fa44db0c4ea8cf3da001
+      internalID: 417638065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_86"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1961df1126ea84341a8ae79af1eccb36
+      internalID: 209648757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_87"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a91c77c9f28cf6488fd7a0d3b0c6ad8
+      internalID: 1030701529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_88"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c5c406f609d7f4ba0dc7b26b7c54d7
+      internalID: 1589907106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_89"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 611a36ed9fd40d24f80c32e30eb30875
+      internalID: 1044573380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_90"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07d339722bd9fd34ba31321ab25d26c4
+      internalID: -2116003242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_91"
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc8acc7da9f2814d9881734ad182166
+      internalID: 1749335974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_92"
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7713791cfb0b5264a8223c2579f20ebf
+      internalID: 2011984321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_93"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ef56e7cc82bab409f30daf429727e5
+      internalID: 18943361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_94"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2422fe76c4fce64ba0beafa08cb737b
+      internalID: -651429069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_95"
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be33c04f8d3abfd44b177f387211e771
+      internalID: 2015500244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_96"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc0cb1325a0c7541bffc12c8d3578c5
+      internalID: -1107483049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_97"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fb472320fcbeb4ab2c12354bbfca39
+      internalID: 177885852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_98"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d4d062ae952894c965c2c0ef643d07
+      internalID: 1481144917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_99"
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08ed7a0a92904bf46bd1e6f43b4a952e
+      internalID: 704162420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_100"
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d6c557a273116343b50c31abc40f3a6
+      internalID: -2146842488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_101"
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9caffa1925ea50b40b758c72a1c01517
+      internalID: -769082987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_102"
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b61c000c3698a24d8722aef54af2bad
+      internalID: -1954472321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_Empty"
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02d4988e968bc4469106e422f574d49
+      internalID: -2124920594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7e8df2879ab3c234ba34f9f563af39a8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      1: 186461086176538127
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_0": 1292619128988044281
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_1": 1508790467
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_10": -1490277726
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_100": -2146842488
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_101": -769082987
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_102": -1954472321
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_11": -599965916843730032
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_12": 799713257896960343
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_13": 4240705340449841021
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_14": -3599926377820497934
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_15": -4565925444848983919
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_16": 186461086176538127
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_17": -1979318442
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_18": 1696546756791762387
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_19": 4051586462485616814
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_2": 1790605501
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_20": -2418954668836508222
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_21": 5748706248550986760
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_22": 4567164456712614958
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_23": -3874598532327503523
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_24": -4092870834930308604
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_25": -401040091078911462
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_26": 8127749782105403666
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_27": -1098610669586218214
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_28": 6273708138250798600
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_29": 1417657009423328597
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_3": 1435553945
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_30": -6858051798429239866
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_31": 1547276778
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_32": -1514028722
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_33": -1700459646
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_34": -74966324
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_35": -2893327348643357338
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_36": 7045041193267064179
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_37": -326676769
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_38": 1925886832
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_39": 313137553
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_4": -7885578273454458854
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_40": 1888964450
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_41": 299491488
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_42": -2113597954
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_43": -851398426
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_44": -2291548302639714994
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_45": 483285354
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_46": -1203695608
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_47": -419840882
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_48": 1063786283
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_49": 214816651
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_5": 3997312698977481160
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_50": -2083022295
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_51": -284579635
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_52": 203193223
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_53": 1092363124
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_54": -109266662
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_55": -975703569
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_56": -1440003986
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_57": 1526127735
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_58": 2057994503
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_59": -1384117700
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_6": -6994922916730879037
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_60": 1871496602
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_61": 51438597
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_62": -994589455
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_63": 683475897
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_64": -36252141
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_65": -1274275342
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_66": -1361728027
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_67": 679368123
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_68": -1230014167
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_69": 484279276
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_7": 4785643260114148442
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_70": -118970141
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_71": 228062146
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_72": 154001480
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_73": -1278906611
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_74": 207377435
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_75": 1990374058
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_76": 2002656478
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_77": -729431740
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_78": -2038503176
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_79": 1955404298
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_8": 7137414885138995830
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_80": -94209663
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_81": -2053195135
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_82": 59744201
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_83": -139016451
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_84": 524862679
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_85": 417638065
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_86": 209648757
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_87": 1030701529
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_88": 1589907106
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_89": 1044573380
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_9": 5790961457684827497
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_90": -2116003242
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_91": 1749335974
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_92": 2011984321
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_93": 18943361
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_94": -651429069
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_95": 2015500244
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_96": -1107483049
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_97": 177885852
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_98": 1481144917
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_99": 704162420
+      "Tile Sheet \u30BF\u30A4\u30EB\u30B7\u30FC\u30C8_Empty": -2124920594
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

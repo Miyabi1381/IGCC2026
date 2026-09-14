@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class DropObject : MonoBehaviour
 {
-    // 当たり判定を2つ使います、IsTrigger付きがプレイヤーが通ったかのフラグで、なしが地面との衝突判定です
-    // use two colliders: one with IsTrigger for detecting the player, and another without it for ground collision detection.
-
     private Rigidbody2D rb;
     [SerializeField] private float GravityScale = 1f; // Gravity scale for the falling rock 重力
 
-    [Header("Vibration settings　揺れの設定")]
+    [Header("Vibration settings 揺れの設定")]
     [SerializeField] private float shakeDuration = 0.35f; // shake duration in seconds 揺れる時間
     [SerializeField] private float shakeMagnitude = 0.06f; // Range of fluctuation  揺れ幅
 
@@ -21,29 +18,26 @@ public class DropObject : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         originalPos = transform.position;
-    }
 
-    void Update()
-    {
-        // 落ちてくるオブジェクトの状態に応じて子オブジェクトを切り替える
+        // 最初は子オブジェクトをオフにしておく
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(isTriggered);
+            child.gameObject.SetActive(false);
         }
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Player is detected and the drop sequence hasn't been triggered
+        // プレイヤーが検出されたが、ドロップシーケンスがトリガーされていない場合
         if (other.gameObject.CompareTag("Player") && !isTriggered)
         {
+            // 重複判定を防ぐため、触れた瞬間にフラグを立てる
             isTriggered = true;
             StartCoroutine(DropSequence());
         }
     }
 
-    // Coroutine to handle the drop sequence
-    // 落下するときの処理
+    // ドロップシーケンスの処理
+    // Drop sequence processing
     private IEnumerator DropSequence()
     {
         float elapsed = 0f;
@@ -63,6 +57,12 @@ public class DropObject : MonoBehaviour
         // 振動が終わったら元の位置に戻す
         transform.position = originalPos;
 
+        // 落下開始のタイミングで子オブジェクトをオンにする
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+
         // 落下開始
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = GravityScale;
@@ -71,7 +71,6 @@ public class DropObject : MonoBehaviour
     }
 
     // 地面に当たったかの判定
-    // Collision detection with the ground
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -86,16 +85,21 @@ public class DropObject : MonoBehaviour
         }
     }
 
-    // 作動した後に、再度作動させるためのリセット処理
-    // Reset process to allow reactivation after it has been triggered
+    // リセット処理
+    // Reset processing
     public void ResetDropObject()
     {
-        // Reset the drop object to its original state
         isTriggered = false;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0f;
+
+        // 落下中の勢いもリセットする
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
         transform.position = originalPos;
-        // Deactivate all child objects
+
+        // 子オブジェクトを無効にする
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);

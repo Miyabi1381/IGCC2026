@@ -6350,7 +6350,7 @@ MonoBehaviour:
   DoubleJumpUnlocked: 0
   CurrentOfferings: 0
   OfferingPickupPrefab: {fileID: 538939379160329976, guid: 5da96faf4cd8bd849b3ce44eb1756758, type: 3}
-  DropScatterRadius: 2
+  DropScatterRadius: 1
   SolidLayer:
     serializedVersion: 2
     m_Bits: 200

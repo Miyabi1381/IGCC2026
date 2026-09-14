@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 
 public class DeathManager : MonoBehaviour
 {
@@ -32,6 +33,14 @@ public class DeathManager : MonoBehaviour
 
     [Header("--- ABILITY UNLOCKS (persist across every future spawn) ---")]
     public bool DoubleJumpUnlocked = false; // lives here, not on PlayerController, so it survives Destroy
+
+    [Header("--- OFFERINGS ---")]
+    public int CurrentOfferings = 0;       // what the current player is carrying right now
+    private List<Sprite> CollectedOfferingSprites = new List<Sprite>();
+    public GameObject OfferingPickupPrefab; // spawned as scattered drops when the player dies
+    public float DropScatterRadius = 0.6f;  // how far apart dropped offerings scatter from the death point
+    public LayerMask SolidLayer;            // Ground + Wall (+ Corpse if desired) — dropped offerings won't spawn inside these
+    public float OfferingCheckRadius = 0.15f; // roughly the offering sprite's own radius, for the overlap check
 
     private int deathCount = 0;
     private GameObject currentPlayer;
@@ -90,6 +99,60 @@ public class DeathManager : MonoBehaviour
         }
     }
 
+    // Called by an OfferingPickup when the current player collects it.
+    public void CollectOffering(Sprite offeringSprite)
+    {
+        CurrentOfferings++;
+        CollectedOfferingSprites.Add(offeringSprite);
+    }
+
+    // Called by PlayerDied() — scatters the current offering count as pickups near the death spot,
+    // then clears the carried count, since dying costs you whatever you were holding.
+    private void DropOfferingsAtDeath(Vector3 position)
+    {
+        if (OfferingPickupPrefab == null || CollectedOfferingSprites.Count <= 0)
+            return;
+
+        foreach (Sprite offeringSprite in CollectedOfferingSprites)
+        {
+            Vector3 spawnPos = FindValidScatterPosition(position);
+
+            GameObject newOffering = Instantiate(
+                OfferingPickupPrefab,
+                spawnPos,
+                Quaternion.identity
+            );
+
+            OfferingPickup pickup = newOffering.GetComponent<OfferingPickup>();
+
+            if (pickup != null)
+                pickup.SetOfferingSprite(offeringSprite);
+        }
+
+        CollectedOfferingSprites.Clear();
+        CurrentOfferings = 0;
+    }
+
+    // Tries several random offsets around the death point, only accepting one that doesn't overlap
+    // solid geometry (walls/ground) — so offerings never spawn stuck inside a wall or off a ledge
+    // into unreachable space. Falls back to the exact death position if nothing valid is found.
+    private Vector3 FindValidScatterPosition(Vector3 origin)
+    {
+        const int maxAttempts = 8;
+
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * DropScatterRadius;
+            Vector3 candidate = origin + new Vector3(randomOffset.x, randomOffset.y, 0f);
+
+            bool overlapsSolid = Physics2D.OverlapCircle(candidate, OfferingCheckRadius, SolidLayer);
+            if (!overlapsSolid)
+                return candidate;
+        }
+
+        return origin; // every attempt failed — just drop it exactly where the player died
+    }
+
     // Called by PlayerController.Die() right as a player becomes a corpse.
     public void PlayerDied(GameObject corpse)
     {
@@ -105,6 +168,7 @@ public class DeathManager : MonoBehaviour
         corpseHistory.Add(corpse);
 
         TrimOldestCorpses();
+        DropOfferingsAtDeath(corpse.transform.position); // scatter carried offerings at the death spot
 
         deathCount++;
         SpawnNextPlayer();

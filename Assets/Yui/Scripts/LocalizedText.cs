@@ -41,6 +41,10 @@ public class LocalizedText : MonoBehaviour
             LanguageManager.Instance.OnLanguageChanged -= HandleLanguageChanged;
         }
     }
+    void Start() 
+    {
+        ApplyText();
+    }
 
     private void HandleLanguageChanged(Language language)
     {
@@ -49,13 +53,13 @@ public class LocalizedText : MonoBehaviour
 
     private void ApplyText()
     {
+
         if (LanguageManager.Instance == null || string.IsNullOrEmpty(key))
         {
             return;
         }
 
         string text = LanguageManager.Instance.GetText(key);
-
         if (tmpText != null)
         {
             tmpText.text = text;

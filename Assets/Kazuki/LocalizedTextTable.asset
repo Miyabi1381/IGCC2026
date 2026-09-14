@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeea2f3b1b926647b1b99a7765ee40a, type: 3}
+  m_Name: LocalizedTextTable
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedTextTable
+  entries:
+  - key: play_move
+    japanese: "\u79FB\u52D5"
+    english: Move
+  - key: play_jump
+    japanese: "\u30B8\u30E3\u30F3\u30D7"
+    english: Jump
+  - key: play_doubleJump
+    japanese: "\u4E8C\u6BB5\u30B8\u30E3\u30F3\u30D7"
+    english: DoubleJump
+  - key: play_ledgeGrab
+    japanese: "\u58C1\u6355\u307E\u308A"
+    english: Ledge grab
+  - key: play_dash
+    japanese: "\u30C0\u30C3\u30B7\u30E5"
+    english: Dash

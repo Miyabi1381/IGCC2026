@@ -11,6 +11,7 @@ public class DropObject : MonoBehaviour
     [SerializeField] private float shakeMagnitude = 0.06f; // Range of fluctuation  揺れ幅
 
     private bool isTriggered = false;
+    private bool hasStopped = false;
     private Vector3 originalPos;
 
     void Start()
@@ -25,6 +26,7 @@ public class DropObject : MonoBehaviour
             child.gameObject.SetActive(false);
         }
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         // プレイヤーが検出されたが、ドロップシーケンスがトリガーされていない場合
@@ -32,6 +34,7 @@ public class DropObject : MonoBehaviour
         {
             // 重複判定を防ぐため、触れた瞬間にフラグを立てる
             isTriggered = true;
+            hasStopped = false; // フラグをリセット
             StartCoroutine(DropSequence());
         }
     }
@@ -68,20 +71,52 @@ public class DropObject : MonoBehaviour
         rb.gravityScale = GravityScale;
 
         Debug.Log("Drop");
+
+        // 少し待機
+        yield return new WaitForSeconds(0.1f);
+
+        // 停止処理が呼ばれておらず、かつ一定以上の速度で動いている間は待機
+        while (!hasStopped && rb.linearVelocity.sqrMagnitude > 0.01f)
+        {
+            yield return null;
+        }
+
+        // 速度がほぼゼロになった場合、停止処理を呼ぶ
+        if (!hasStopped)
+        {
+            StopAndDeactivate();
+        }
+    }
+
+    // 停止と子オブジェクトの無効化処理
+    // Stop and deactivate process
+    private void StopAndDeactivate()
+    {
+        // 既に停止済みならスキップ
+        if (hasStopped) return;
+        hasStopped = true;
+
+        // 落下を完全に止める
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        // 子オブジェクトを無効化する
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        Debug.Log("Stopped and Deactivated");
     }
 
     // 地面に当たったかの判定
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // Groundレイヤーに当たった場合は即座に停止処理を呼ぶ
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            // 落下後、地面に当たったら落下を止める
-            rb.bodyType = RigidbodyType2D.Kinematic;
-
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-
-            Debug.Log("Hit Ground");
+            StopAndDeactivate();
         }
     }
 
@@ -90,6 +125,8 @@ public class DropObject : MonoBehaviour
     public void ResetDropObject()
     {
         isTriggered = false;
+        hasStopped = false; 
+
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0f;
 

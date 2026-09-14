@@ -33,11 +33,11 @@ public class Command : MonoBehaviour
             {
             case 0:
                 //Start
-                StartCoroutine(fadeManager.FadeOutAndLoadScene());
+                StartCoroutine(fadeManager.FadeOutAndLoadScene(0));
                 break;
             case 1:
                 //Setting
-                changeScene.ChangeToSetting();
+                StartCoroutine(fadeManager.FadeOutAndLoadScene(1));
                 break;
             case 2:
                 //Exit Game

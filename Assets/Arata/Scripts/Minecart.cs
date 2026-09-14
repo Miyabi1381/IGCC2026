@@ -13,12 +13,23 @@ public class Minecart : MonoBehaviour
 {
     [Header("レールの経路設定 Rail path settings")]
     public List<Waypoint> waypoints = new List<Waypoint>(); // ウェイポイントのリスト List of waypoints
-    [SerializeField] private float speed = 5f;  // 移動速度 Movement speed
-    [SerializeField] private float rotationSpeed = 180f;    // 回転速度 Rotation speed
+
+    [Header("移動設定 Movement settings")]
+    [SerializeField] private float maxSpeed = 10f;   // 最高速度 Max speed
+    [SerializeField] private float acceleration = 5f; // 加速度 Acceleration
 
     private int currentIndex = 0;   // 現在の目標ウェイポイントのインデックス Current target waypoint index
     private bool isMoving = false;   // 移動中かどうかのフラグ Flag indicating whether the minecart is moving
-    private Transform passenger = null;    // 乗っているプレイヤーを記憶する変数 Passenger memory variable
+    private float currentSpeed = 0f;       // 現在の速度 Current speed
+
+    // 乗っているプレイヤーを記憶する変数 Passenger memory variables
+    private Transform passenger = null;
+    private Rigidbody2D passengerRb = null;
+    private Collider2D passengerCollider = null;
+
+    // 摩擦を管理する変数 Friction management variables
+    private PhysicsMaterial2D originalMaterial = null;
+    private PhysicsMaterial2D gripMaterial = null;
 
     // ゲーム中に実際に使用するワールド座標のリスト List of absolute world coordinates used during gameplay
     private List<Waypoint> worldWaypoints = new List<Waypoint>();
@@ -33,36 +44,61 @@ public class Minecart : MonoBehaviour
             absoluteWp.eulerAngles = (transform.rotation * Quaternion.Euler(wp.eulerAngles)).eulerAngles;
             worldWaypoints.Add(absoluteWp);
         }
+
+        // コード上で強力な滑り止めマテリアルを作成しておく
+        gripMaterial = new PhysicsMaterial2D("MinecartGrip");
+        gripMaterial.friction = 10f;
+        gripMaterial.bounciness = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // ウェイポイントが存在しない場合や移動が無効な場合はスキップ
+        // 移動が存在しない場合は処理をスキップ
         if (!isMoving || worldWaypoints.Count == 0 || currentIndex >= worldWaypoints.Count) return;
 
-        // 移動する前の位置を記憶
+        // 移動する「前」の位置を記憶
         Vector3 previousPosition = transform.position;
 
         // 現在の目標ポイントを取得
+        // Get the current target waypoint
         Waypoint target = worldWaypoints[currentIndex];
 
-        // 常に同じ速度で目標ポイントへ向かって移動
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-        // 目標の角度へ向かってトロッコを回転させる処理
-        Quaternion targetRotation = Quaternion.Euler(target.eulerAngles);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        // トロッコが動いただけプレイヤーに足す
-        if (passenger != null)
+        // トロッコの加速処理
+        if (currentSpeed < maxSpeed)
         {
-            Vector3 deltaPosition = transform.position - previousPosition;
-            passenger.position += deltaPosition;
+            currentSpeed += acceleration * Time.fixedDeltaTime;
+            if (currentSpeed > maxSpeed)
+            {
+                currentSpeed = maxSpeed;
+            }
         }
 
-        // 目標ポイントにほぼ到達したら、次のポイントへ切り替え
+        // 現在の速度(currentSpeed)で目標ポイントへ向かって移動
+        transform.position = Vector3.MoveTowards(transform.position, target.position, currentSpeed * Time.fixedDeltaTime);
+
+        // トロッコが動いた差分を計算し、プレイヤーに足す
+        if (passenger != null)
+        {
+            Vector2 deltaPosition = transform.position - previousPosition;
+
+            // プレイヤーがRigidbody2Dを持っている場合は、物理演算の座標に直接足すことでガタつきを無くす
+            if (passengerRb != null)
+            {
+                passengerRb.position += deltaPosition;
+            }
+            else
+            {
+                passenger.position += (Vector3)deltaPosition;
+            }
+        }
+
+        // 目標ポイントに到達したら、次のポイントへ切り替えつつ角度を変える
         if (Vector2.Distance(transform.position, target.position) < 0.05f)
         {
+            // 到達した瞬間に位置をぴったり合わせ、そのポイントに設定された角度へ変更する
+            transform.position = target.position;
+            transform.rotation = Quaternion.Euler(target.eulerAngles);
+
             currentIndex++;
         }
     }
@@ -75,6 +111,15 @@ public class Minecart : MonoBehaviour
         {
             // プレイヤーを子オブジェクトにせず、変数として記憶する
             passenger = collision.transform;
+            passengerRb = collision.collider.attachedRigidbody;
+            passengerCollider = collision.collider;
+
+            // プレイヤーの摩擦を一時的に「強力な滑り止め」に差し替えて、斜面でのずり落ちを防ぐ
+            if (passengerCollider != null)
+            {
+                originalMaterial = passengerCollider.sharedMaterial;
+                passengerCollider.sharedMaterial = gripMaterial;
+            }
 
             // トロッコを発車させる
             isMoving = true;
@@ -90,10 +135,17 @@ public class Minecart : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            // プレイヤーが離れたら記憶を消す
+            // プレイヤーが離れたら摩擦を元に戻す
             if (passenger == collision.transform)
             {
+                if (passengerCollider != null)
+                {
+                    passengerCollider.sharedMaterial = originalMaterial;
+                }
+
                 passenger = null;
+                passengerRb = null;
+                passengerCollider = null;
             }
         }
     }
@@ -110,8 +162,18 @@ public class Minecart : MonoBehaviour
             currentIndex = 0;
             isMoving = false;
 
-            // リセット時に乗客の記憶もクリア
+            // 速度と乗客もクリア
+            currentSpeed = 0f;
+
+            // リセット時にもプレイヤーの摩擦を元に戻す
+            if (passengerCollider != null)
+            {
+                passengerCollider.sharedMaterial = originalMaterial;
+            }
+
             passenger = null;
+            passengerRb = null;
+            passengerCollider = null;
         }
     }
 }
@@ -131,6 +193,7 @@ public class MinecartEditor : Editor
     }
 
     // Inspector上でのGUI描画
+    // GUI rendering in Inspector
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -184,10 +247,8 @@ public class MinecartEditor : Editor
             EditorGUI.BeginChangeCheck();
 
             // 移動ハンドル
-            // Position handle
             Vector3 newWorldPosition = Handles.PositionHandle(worldPos, worldRot);
             // 回転ハンドル
-            // Rotation handle
             Quaternion newWorldRotation = Handles.RotationHandle(worldRot, worldPos);
 
             // 変更があった場合、Undoを記録してウェイポイントを更新

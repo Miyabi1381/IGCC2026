@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: 6817841042726578345
     second: Keybinds_6
+  - first:
+      213: -1502075066088674583
+    second: Keybinds_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -271,6 +274,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Keybinds_7
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 191
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea20db8fae872be0800000000000000
+      internalID: -1502075066088674583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -292,6 +317,7 @@ TextureImporter:
       Keybinds_4: -6293206793184696471
       Keybinds_5: 1771251413659885317
       Keybinds_6: 6817841042726578345
+      Keybinds_7: -1502075066088674583
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

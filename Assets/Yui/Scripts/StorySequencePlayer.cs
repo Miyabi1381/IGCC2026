@@ -11,7 +11,7 @@ public class StorySequencePlayer : MonoBehaviour
     [SerializeField] private TMP_Text displayText;
 
     [Header("Story Content")]
-    [Tooltip("LocalizedTextTableに登録済みのkeyを、表示したい順番に並べる")]
+    [Tooltip("LocalizedTextTable??????key?????????????")]
     [SerializeField] private string[] storyKeys;
 
     [Header("Typewriter Effect")]
@@ -29,6 +29,8 @@ public class StorySequencePlayer : MonoBehaviour
     private bool isTyping = false;
     private Coroutine typeRoutine;
     private string currentFullText = "";
+
+    public string[] StoryKeys { get => storyKeys; set => storyKeys = value; }
 
     private void Awake()
     {
@@ -99,7 +101,7 @@ public class StorySequencePlayer : MonoBehaviour
     {
         currentIndex++;
 
-        if (currentIndex >= storyKeys.Length)
+        if (currentIndex >= StoryKeys.Length)
         {
             onStoryComplete?.Invoke();
             return;
@@ -116,7 +118,7 @@ public class StorySequencePlayer : MonoBehaviour
             return;
         }
 
-        string key = storyKeys[currentIndex];
+        string key = StoryKeys[currentIndex];
         currentFullText = LanguageManager.Instance.GetText(key);
 
         if (typeRoutine != null)
@@ -166,7 +168,7 @@ public class StorySequencePlayer : MonoBehaviour
     // 再生中に言語が切り替わった場合、今表示中の行を新しい言語で出し直す。
     private void HandleLanguageChanged(Language language)
     {
-        if (currentIndex >= 0 && currentIndex < storyKeys.Length)
+        if (currentIndex >= 0 && currentIndex < StoryKeys.Length)
         {
             DisplayCurrentLine();
         }

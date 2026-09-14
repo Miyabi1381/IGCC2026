@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class FadeManager : MonoBehaviour
 {
     [SerializeField]private ChangeScene changeScene;
+    [SerializeField]private Command command;
     public Image fadePanel;
     public float fadeDuration = 1.0f;
 
-    public IEnumerator FadeOutAndLoadScene()
+    public IEnumerator FadeOutAndLoadScene(int state)
     {
         fadePanel.enabled = true;
         float elapsedTime = 0.0f;
@@ -17,12 +18,20 @@ public class FadeManager : MonoBehaviour
 
         while (elapsedTime < fadeDuration)
         {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime*2;
+            float t = Easing.OutQuint(elapsedTime);
             fadePanel.color = Color.Lerp(startColor, endColor, t);
             yield return null;
         }
         fadePanel.color = endColor;
-        changeScene.ChangeToPlay();
+        switch (state)
+        {
+        case 0:
+            changeScene.ChangeToPlay();
+            break;
+        case 1:
+            changeScene.ChangeToSetting();
+            break;
+        }
     }
 }

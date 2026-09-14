@@ -8,7 +8,6 @@
 // ======================================================================================
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static MiyaLib.TileType;
@@ -57,25 +56,29 @@ namespace MiyaLib
         // ライフサイクル関数 -----------------------------------------------------------
 		private void Start()
 		{
-            // 4マスの組み合わせパターンと16種類のタイルを紐付ける
-            neighbourTupleToTile = new()
+            // Placeholderの描画を消す
+            if (placeholderTilemap.TryGetComponent<TilemapRenderer>(out var renderer))
+                renderer.enabled = false;
+
+                // 4マスの組み合わせパターンと16種類のタイルを紐付ける
+                neighbourTupleToTile = new()
             {
-                {new (Ground,  Ground,  Ground,  Ground),  tiles[6]},  
-                {new (Empty, Empty, Empty, Ground),  tiles[13]}, ///< 右下外側
-                {new (Empty, Empty, Ground,  Empty), tiles[0]},  ///< 左下外側
-                {new (Empty, Ground,  Empty, Empty), tiles[8]},  ///< 右上外側
-                {new (Ground,  Empty, Empty, Empty), tiles[15]}, ///< 左上外側
-                {new (Empty, Ground,  Empty, Ground),  tiles[1]},  ///< 右端
-                {new (Ground,  Empty, Ground,  Empty), tiles[11]}, ///< 左端
-                {new (Empty, Empty, Ground,  Ground),  tiles[3]},  ///< 下端
-                {new (Ground,  Ground,  Empty, Empty), tiles[9]},  ///< 上端
-                {new (Empty, Ground,  Ground,  Ground),  tiles[5]},  ///< 右下内側
-                {new (Ground,  Empty, Ground,  Ground),  tiles[2]},  ///< 左下内側
-                {new (Ground,  Ground,  Empty, Ground),  tiles[10]}, ///< 右上内側
-                {new (Ground,  Ground,  Ground,  Empty), tiles[7]},  ///< 左上内側
-                {new (Empty, Ground,  Ground,  Empty), tiles[14]}, ///< 斜め右上
-                {new (Ground,  Empty, Empty, Ground),  tiles[4]},  ///< 斜め右下
-                {new (Empty, Empty, Empty, Empty), tiles[12]},
+                {new (Ground, Ground, Ground, Ground), tiles[6]},  
+                {new (Empty,  Empty,  Empty,  Ground), tiles[13]}, ///< 右下外側
+                {new (Empty,  Empty,  Ground, Empty),  tiles[0]},  ///< 左下外側
+                {new (Empty,  Ground, Empty,  Empty),  tiles[8]},  ///< 右上外側
+                {new (Ground, Empty,  Empty,  Empty),  tiles[15]}, ///< 左上外側
+                {new (Empty,  Ground, Empty,  Ground), tiles[1]},  ///< 右端
+                {new (Ground, Empty,  Ground, Empty),  tiles[11]}, ///< 左端
+                {new (Empty,  Empty,  Ground, Ground), tiles[3]},  ///< 下端
+                {new (Ground, Ground, Empty,  Empty),  tiles[9]},  ///< 上端
+                {new (Empty,  Ground, Ground, Ground), tiles[5]},  ///< 右下内側
+                {new (Ground, Empty,  Ground, Ground), tiles[2]},  ///< 左下内側
+                {new (Ground, Ground, Empty,  Ground), tiles[10]}, ///< 右上内側
+                {new (Ground, Ground, Ground, Empty),  tiles[7]},  ///< 左上内側
+                {new (Empty,  Ground, Ground, Empty),  tiles[14]}, ///< 斜め右上
+                {new (Ground, Empty,  Empty,  Ground), tiles[4]},  ///< 斜め右下
+                {new (Empty,  Empty,  Empty,  Empty),  tiles[12]},
             };
             RefreshDisplayTilemap();
         }
@@ -144,13 +147,27 @@ namespace MiyaLib
         /// </summary>
         public void RefreshDisplayTilemap()
         {
-            for(int i = -50; i < 50; i++)
+            // 描画したいものがなければ処理を行わない
+            if (displayTilemap == null || placeholderTilemap == null) return;
+
+            // 表示用タイルマップをクリア
+            displayTilemap.ClearAllTiles();
+
+            // 判定用タイルが存在する最小の矩形領域を取得
+            BoundsInt bounds = placeholderTilemap.cellBounds;
+
+            // デュアルグリッドの影響範囲を広げる
+            bounds.xMin -= 1;
+            bounds.yMin -= 1;
+            bounds.xMax += 1;
+            bounds.yMax += 1;
+
+            // 領域内のすべての座標（空マス含む）を計算
+            foreach (Vector3Int pos in bounds.allPositionsWithin)
             {
-                for (int j = -50; j < 50; j++)
-                {
-                    SetDisplayTile(new Vector3Int(i, j, 0));
-                }
+                // 直接その座標の表示用タイルをセットする
+                displayTilemap.SetTile(pos, CalculateDisplayTile(pos));
             }
         }
-	}
+    }
 }

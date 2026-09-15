@@ -489,10 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StorySequencePlayer
   displayText: {fileID: 2053530166}
   storyKeys:
-  - story_1
-  - story_2
-  - story_3
-  - story_4
+  - GoodEnding
   useTypewriterEffect: 1
   charactersPerSecond: 10
   advanceActionReference: {fileID: 0}
@@ -501,7 +498,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2053530165}
         m_TargetAssemblyTypeName: StorySequencePlayer, Assembly-CSharp
-        m_MethodName: TransitionToMainGame
+        m_MethodName: TransitionToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

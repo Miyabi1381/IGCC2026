@@ -489,10 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StorySequencePlayer
   displayText: {fileID: 2053530166}
   storyKeys:
-  - story_1
-  - story_2
-  - story_3
-  - story_4
+  - BadEnding_1
+  - BadEnding_2
   useTypewriterEffect: 1
   charactersPerSecond: 10
   advanceActionReference: {fileID: 0}

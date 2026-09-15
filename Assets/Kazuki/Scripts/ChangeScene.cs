@@ -7,7 +7,7 @@ public class ChangeScene : MonoBehaviour
     [SerializeField]FadeManager fadeManager;
     public void ChangeToPlay()
     {
-        SceneManager.LoadScene("Play Scene");
+        SceneManager.LoadScene("Opening Scene");
         Debug.Log("ChangePlayScene");
     }
     public void ChangeToTitle()

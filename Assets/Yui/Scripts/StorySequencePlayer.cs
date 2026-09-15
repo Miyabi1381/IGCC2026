@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class StorySequencePlayer : MonoBehaviour
@@ -172,5 +173,15 @@ public class StorySequencePlayer : MonoBehaviour
         {
             DisplayCurrentLine();
         }
+    }
+
+    public void TransitionToMainGame()
+    {
+        SceneManager.LoadScene("MainGame");
+    }
+
+    public void TransitionToTitle()
+    {
+        SceneManager.LoadScene("Title Scene");
     }
 }

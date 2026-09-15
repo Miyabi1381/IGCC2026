@@ -369,8 +369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 254}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -7.19, y: -0.11689}
+  m_SizeDelta: {x: 92.68, y: 111.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632761573
 MonoBehaviour:
@@ -504,9 +504,8 @@ RectTransform:
   m_LocalScale: {x: 0.01675042, y: 0.01675042, z: 0.01675042}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1357633460}
-  - {fileID: 2053530164}
   - {fileID: 632761572}
+  - {fileID: 2053530164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -514,81 +513,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060.9999, y: 597}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1357633459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1357633460}
-  - component: {fileID: 1357633462}
-  - component: {fileID: 1357633461}
-  m_Layer: 5
-  m_Name: BackGround
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1357633460
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357633459}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1269546831}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0024261, y: 0.00099182}
-  m_SizeDelta: {x: 1061, y: 597}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1357633461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357633459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -19314004337531388, guid: d347af9ba768f444186a2bf5dfa9c4ae, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1357633462
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357633459}
-  m_CullTransparentMesh: 1
 --- !u!1 &2053530163
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,8 +548,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8e-14, y: -203}
-  m_SizeDelta: {x: 890.59, y: 135.71}
+  m_AnchoredPosition: {x: -27.86, y: -201.01}
+  m_SizeDelta: {x: 834.88, y: 131.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053530165
 MonoBehaviour:
@@ -643,7 +567,7 @@ MonoBehaviour:
   storyImageDisplay: {fileID: 632761573}
   storyLines:
   - Key: story_1
-    Image: {fileID: 6755275329096795002, guid: b3cff91e68f20ae40bb91bf7660c7ac2, type: 3}
+    Image: {fileID: -957524241227709453, guid: 6b99284044653f542b60960a7859c23d, type: 3}
     AutoAdvanceDelay: -1
   - Key: story_2
     Image: {fileID: 5919990933074269837, guid: 4effc683a1171ac4cb6e18fde6ca3ecc, type: 3}
@@ -652,10 +576,10 @@ MonoBehaviour:
     Image: {fileID: -4008665456646069722, guid: f3155d0d19f1f4d4bb0193f7d0e77ad4, type: 3}
     AutoAdvanceDelay: -1
   - Key: story_4
-    Image: {fileID: 0}
+    Image: {fileID: -4008665456646069722, guid: f3155d0d19f1f4d4bb0193f7d0e77ad4, type: 3}
     AutoAdvanceDelay: -1
   - Key: story_5
-    Image: {fileID: 0}
+    Image: {fileID: -19314004337531388, guid: a2f821ac5445feb4083cb7e628a91356, type: 3}
     AutoAdvanceDelay: -1
   useTypewriterEffect: 1
   charactersPerSecond: 10
@@ -724,8 +648,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
-  m_fontSizeBase: 52
+  m_fontSize: 32.08
+  m_fontSizeBase: 32.08
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

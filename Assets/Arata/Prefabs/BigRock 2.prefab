@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4845815458652299725}
   - component: {fileID: -829411457082440484}
   m_Layer: 7
-  m_Name: BigRock
+  m_Name: BigRock 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,13 +136,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RollingBoulder
   acceleration: 3
   maxSpeed: 5
-  moveRight: 1
+  moveRight: 0
   targetTag: Player
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
   aliveScriptName: PlayerController
-  lifetime: 6
+  lifetime: 4
 --- !u!58 &4845815458652299725
 CircleCollider2D:
   m_ObjectHideFlags: 0

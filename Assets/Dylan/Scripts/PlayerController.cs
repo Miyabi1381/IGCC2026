@@ -416,7 +416,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded)
         {
-            Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
+            Debug.Log("Cannot place a checkpoint — not standing on ground.");
             if (audioSource != null && CheckpointFailSFX != null)
                 audioSource.PlayOneShot(CheckpointFailSFX);
             return;
@@ -431,7 +431,23 @@ public class PlayerController : MonoBehaviour
             bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
             if (!onValidGround)
             {
-                Debug.Log("Cannot place a checkpoint on a corpse."); // TODO: feedback SFX/UI for invalid placement
+                Debug.Log("Cannot place a checkpoint on a corpse.");
+                if (audioSource != null && CheckpointFailSFX != null)
+                    audioSource.PlayOneShot(CheckpointFailSFX);
+                return;
+            }
+        }
+
+        int MinecartLayerIndex = LayerMask.NameToLayer("Minecart");
+        if(MinecartLayerIndex != -1)
+        {
+            LayerMask MinecartMask = 1 << MinecartLayerIndex;
+            LayerMask validGroundMask = GroundLayer & ~MinecartMask; // GroundLayer minus Minecart
+
+            bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
+            if (!onValidGround)
+            {
+                Debug.Log("Cannot place a checkpoint on a minecart.");
                 if (audioSource != null && CheckpointFailSFX != null)
                     audioSource.PlayOneShot(CheckpointFailSFX);
                 return;

@@ -81,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1178190145
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6960903314270103029, guid: b9c864b2a5ac8394da80711f9e194257, type: 3}
@@ -141,6 +141,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  aliveScriptName: PlayerController
+  lifetime: 8
 --- !u!58 &4845815458652299725
 CircleCollider2D:
   m_ObjectHideFlags: 0

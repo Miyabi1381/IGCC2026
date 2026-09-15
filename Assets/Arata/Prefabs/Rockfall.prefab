@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1178190145
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6815891008290239111, guid: 0fa913ec02fc3ec4694a05d3473d1f11, type: 3}
@@ -170,6 +170,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rockfall
   breakEffectPrefab: {fileID: 8958433031325988183, guid: 5483e1ef511807746b08956d331011f6, type: 3}
-  layer:
-    serializedVersion: 2
-    m_Bits: 4294967295

@@ -383,9 +383,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Places a checkpoint at the player's current position — only allowed while grounded,
-    // reusing the same GroundLayer overlap check already driving normal movement (isGrounded),
-    // so "connected to the ground" means exactly what it already means everywhere else in the script.
+    // Places a checkpoint at the player's current position — only allowed while grounded on
+    // real terrain, reusing the same GroundLayer overlap check already driving normal movement
+    // (isGrounded), but with the Corpse layer specifically excluded — standing on a corpse
+    // shouldn't count, since that corpse could later be trimmed/removed from the scene.
     public void OnPlaceCheckpoint(InputValue value)
     {
         if (!value.isPressed) return;
@@ -395,6 +396,20 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
             return;
+        }
+
+        int corpseLayerIndex = LayerMask.NameToLayer("Corpse");
+        if (corpseLayerIndex != -1)
+        {
+            LayerMask corpseMask = 1 << corpseLayerIndex;
+            LayerMask validGroundMask = GroundLayer & ~corpseMask; // GroundLayer minus Corpse
+
+            bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
+            if (!onValidGround)
+            {
+                Debug.Log("Cannot place a checkpoint on a corpse."); // TODO: feedback SFX/UI for invalid placement
+                return;
+            }
         }
 
         if (DeathManager.Instance != null)
@@ -499,7 +514,7 @@ public class PlayerController : MonoBehaviour
         if (corpseLayer != -1)
             gameObject.layer = corpseLayer;
         else
-            Debug.LogWarning("PlayerController: No layer named 'Corpse' found. Add one in Project Settings > Tags and Layers.");
+            Debug.LogWarning("PlayerController: No layer named 'Corpse' found.");
 
         if (DeathManager.Instance != null)
             DeathManager.Instance.PlayerDied(gameObject);

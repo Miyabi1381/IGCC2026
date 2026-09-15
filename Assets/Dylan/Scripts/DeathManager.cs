@@ -39,14 +39,14 @@ public class DeathManager : MonoBehaviour
     public CinemachineCamera GameCamera;
 
     [Header("--- STAMINA UI ---")]
-    public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
-    public StaminaBarUI StaminaBarDisplay;      // drag the StaminaBar object holding StaminaBarUI.cs here
+    public StaminaBarFollow StaminaBarPosition; 
+    public StaminaBarUI StaminaBarDisplay;   
 
     [Header("--- CORPSE CLEANUP ---")]
     public int MaxCorpses = 10; // total corpses allowed in the scene (active + retired); oldest is deleted past this
 
     [Header("--- ABILITY UNLOCKS (persist across every future spawn) ---")]
-    public bool DoubleJumpUnlocked = false; // lives here, not on PlayerController, so it survives Destroy
+    public bool DoubleJumpUnlocked = false;
 
     [Header("--- OFFERINGS ---")]
     public int CurrentOfferings = 0;       // what the current player is carrying right now

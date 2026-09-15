@@ -2224,7 +2224,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 65ed3b64a130fb3469131ddaf8fc9e83, type: 2}
   - {fileID: 11400000, guid: 9deaf84b5f3ab28429ab77cae6c49362, type: 2}
   - {fileID: 11400000, guid: ad1f2fcd7c98a744a9e0bdd2839a1f38, type: 2}
-  - {fileID: 11400000, guid: 32eac0daa224ab7478d3ca3100dba54c, type: 2}
+  - {fileID: 11400000, guid: e889b8e703342e04b8e4831edb39059c, type: 2}
 --- !u!483693784 &1178946648
 TilemapRenderer:
   serializedVersion: 2

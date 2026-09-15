@@ -50,9 +50,6 @@ public class PlayerController : MonoBehaviour
     private Sprite skeletonSprite;   // assigned per-spawn by DeathManager, matching this variant
     private bool isDead = false;
 
-    [Header("--- DEBUG ---")]
-    public bool DebugKillKey = true; // toggle off before a real build
-
     [Header("--- ANIMATION ---")]
     private Animator PlayerAnim;
     public Sprite BodySprite;
@@ -126,11 +123,6 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = localScale;
             }
         }
-
-        if (DebugKillKey && Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            Die();
-        }
     }
 
     // Handles three visual states:
@@ -176,8 +168,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    // Idle → stop Animator from replacing the variant sprite
+                    // Idle → stop Animator from driving the sprite, and explicitly show the
+                    // variant's idle pose instead of leaving whatever walk frame was last active
+                    PlayerAnim.SetBool("isWalking", false); // keep the parameter accurate for next time Animator re-enables
                     PlayerAnim.enabled = false;
+
+                    if (spriteRenderer != null && BodySprite != null)
+                        spriteRenderer.sprite = BodySprite;
                 }
             }
 
@@ -514,7 +511,7 @@ public class PlayerController : MonoBehaviour
         if (corpseLayer != -1)
             gameObject.layer = corpseLayer;
         else
-            Debug.LogWarning("PlayerController: No layer named 'Corpse' found.");
+            Debug.LogWarning("PlayerController: No layer named 'Corpse' found. Add one in Project Settings > Tags and Layers.");
 
         if (DeathManager.Instance != null)
             DeathManager.Instance.PlayerDied(gameObject);

@@ -7098,7 +7098,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 7654146131017544287, guid: a76b1347567a77648b544f5b92536c53, type: 3}
   PlayerVariants:
   - Name: Blue Shiba
-    BodySprite: {fileID: 2211429613928324701, guid: 8c981b40d3488f847b80d761654184a5, type: 3}
+    BodySprite: {fileID: 1947350819778734366, guid: b3f8fb5ce686d704691b61003d5e5fea, type: 3}
     DeathPoseSprite: {fileID: 9107380751157506149, guid: ece9f66035c4c8746ab6b497d839e95e, type: 3}
     SkeletonSprite: {fileID: 4356442362639334886, guid: 756f47aaa18dd1a4c9bd9b618f1dcd27, type: 3}
     Scale: {x: 0.38, y: 0.38, z: 0.38}

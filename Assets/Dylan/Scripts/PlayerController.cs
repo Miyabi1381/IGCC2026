@@ -50,9 +50,6 @@ public class PlayerController : MonoBehaviour
     private Sprite skeletonSprite;   // assigned per-spawn by DeathManager, matching this variant
     private bool isDead = false;
 
-    [Header("--- DEBUG ---")]
-    public bool DebugKillKey = true; // toggle off before a real build
-
     [Header("--- ANIMATION ---")]
     private Animator PlayerAnim;
     public Sprite BodySprite;
@@ -126,11 +123,6 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = localScale;
             }
         }
-
-        if (DebugKillKey && Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            Die();
-        }
     }
 
     // Handles three visual states:
@@ -176,8 +168,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    // Idle → stop Animator from replacing the variant sprite
+                    // Idle → stop Animator from driving the sprite, and explicitly show the
+                    // variant's idle pose instead of leaving whatever walk frame was last active
+                    PlayerAnim.SetBool("isWalking", false); // keep the parameter accurate for next time Animator re-enables
                     PlayerAnim.enabled = false;
+
+                    if (spriteRenderer != null && BodySprite != null)
+                        spriteRenderer.sprite = BodySprite;
                 }
             }
 
@@ -383,9 +380,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Places a checkpoint at the player's current position — only allowed while grounded,
-    // reusing the same GroundLayer overlap check already driving normal movement (isGrounded),
-    // so "connected to the ground" means exactly what it already means everywhere else in the script.
+    // Places a checkpoint at the player's current position — only allowed while grounded on
+    // real terrain, reusing the same GroundLayer overlap check already driving normal movement
+    // (isGrounded), but with the Corpse layer specifically excluded — standing on a corpse
+    // shouldn't count, since that corpse could later be trimmed/removed from the scene.
     public void OnPlaceCheckpoint(InputValue value)
     {
         if (!value.isPressed) return;
@@ -395,6 +393,20 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
             return;
+        }
+
+        int corpseLayerIndex = LayerMask.NameToLayer("Corpse");
+        if (corpseLayerIndex != -1)
+        {
+            LayerMask corpseMask = 1 << corpseLayerIndex;
+            LayerMask validGroundMask = GroundLayer & ~corpseMask; // GroundLayer minus Corpse
+
+            bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
+            if (!onValidGround)
+            {
+                Debug.Log("Cannot place a checkpoint on a corpse."); // TODO: feedback SFX/UI for invalid placement
+                return;
+            }
         }
 
         if (DeathManager.Instance != null)

@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageManager
   textTable: {fileID: 11400000, guid: 48bd2961422ce97449b8511fe5bc9780, type: 2}
-  defaultLanguage: 1
+  defaultLanguage: 0
 --- !u!4 &1880079628
 Transform:
   m_ObjectHideFlags: 0
@@ -577,8 +577,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b4a08342d505a7b4f8901663ce220fad, type: 2}
-  m_sharedMaterial: {fileID: 6026197221816042631, guid: b4a08342d505a7b4f8901663ce220fad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6160c624075eb5c41b181457c57fe2bf, type: 2}
+  m_sharedMaterial: {fileID: 3408310012241679897, guid: 6160c624075eb5c41b181457c57fe2bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -179,4 +179,9 @@ public class StorySequencePlayer : MonoBehaviour
     {
         SceneManager.LoadScene("MainGame");
     }
+
+    public void TransitionToTitle()
+    {
+        SceneManager.LoadScene("Title Scene");
+    }
 }

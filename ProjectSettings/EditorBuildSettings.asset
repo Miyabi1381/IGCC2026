@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Kazuki/MainGame.unity
     guid: 65935b3bffd9952409092bd02fb66c0d
+  - enabled: 1
+    path: Assets/Kazuki/GoodEnding.unity
+    guid: a1e21c07df7cfdd4ba7f71e08eec0b94
+  - enabled: 1
+    path: Assets/Kazuki/BadEnding.unity
+    guid: 2944604fd81e8154fbd761f071a54da8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

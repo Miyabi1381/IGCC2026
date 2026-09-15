@@ -3,6 +3,7 @@ using UnityEngine;
 public class OfferingPickup : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;
+    public AudioClip PickupSFX;
 
     private Sprite offeringSprite;
 
@@ -24,7 +25,11 @@ public class OfferingPickup : MonoBehaviour
         if (DeathManager.Instance != null)
             DeathManager.Instance.CollectOffering(offeringSprite);
 
-        // TODO: play pickup VFX/SFX here
+        // PlayClipAtPoint spawns an independent, temporary audio object that finishes on its
+        // own — using this object's own AudioSource wouldn't work, since Destroy() below removes
+        // the whole GameObject (and any sound playing on it) before the clip could finish.
+        if (PickupSFX != null)
+            AudioSource.PlayClipAtPoint(PickupSFX, transform.position);
 
         Destroy(gameObject);
     }

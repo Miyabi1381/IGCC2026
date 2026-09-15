@@ -1,62 +1,73 @@
 using System.Collections;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class Typewriter : MonoBehaviour
 {
-    // ① 1つのTextMeshProコンポーネントを使い回す
-    [SerializeField] private TextMeshProUGUI m_TextMeshProUGUI;
-
-    // ② 表示したい文章のリスト（インスペクターから複数入力）
-    [SerializeField] private string[] m_TextLines;
-
-    [SerializeField] private float Characterspacing = 0.05f;
+    [SerializeField] private TextMeshProUGUI[] m_TextMeshProUGUI;
+    TextMeshProUGUI textComponent;
+    [SerializeField] private float Characterspacing = 0.05f; // 0.5秒は遅すぎるため0.05秒に修正
 
     private Coroutine typewriterCoroutine;
     private int count = 0;
 
     void Start()
     {
-        if (m_TextMeshProUGUI != null)
+        if (m_TextMeshProUGUI == null) return;
+
+        for (int i = 0; i < m_TextMeshProUGUI.Length; i++)
         {
-            m_TextMeshProUGUI.text = "";
+            if (m_TextMeshProUGUI[i] != null)
+                m_TextMeshProUGUI[i].enabled = false;
         }
     }
-
     public void OnStringChange()
     {
-        if (m_TextMeshProUGUI == null || m_TextLines == null || count >= m_TextLines.Length) return;
+        if (m_TextMeshProUGUI == null || count >= m_TextMeshProUGUI.Length) return;
 
         if (typewriterCoroutine != null)
         {
             StopCoroutine(typewriterCoroutine);
         }
 
-        // 開始
-        typewriterCoroutine = StartCoroutine(DoTypewriter(m_TextLines[count]));
+        for (int i = 0; i < m_TextMeshProUGUI.Length; i++)
+        {
+            if (m_TextMeshProUGUI[i] == null) continue;
+            // 過去に表示したテキストと、今から表示するテキストを有効化
+            m_TextMeshProUGUI[i].enabled = (i <= count);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            if (m_TextMeshProUGUI[i] == null) continue;
+            m_TextMeshProUGUI[i].ForceMeshUpdate();
+            int totalCharacter = m_TextMeshProUGUI[i].textInfo.characterCount;
+            m_TextMeshProUGUI[i].maxVisibleCharacters = totalCharacter;
+        }
+
+        typewriterCoroutine = StartCoroutine(DoTypewriter(count));
         count++;
     }
 
-    private IEnumerator DoTypewriter(string targetText)
-    {
-        // 初期化
-        m_TextMeshProUGUI.text = targetText;
-        m_TextMeshProUGUI.ForceMeshUpdate();
-        m_TextMeshProUGUI.maxVisibleCharacters = 0;
 
-        int totalCharacter = m_TextMeshProUGUI.textInfo.characterCount;
+    private IEnumerator DoTypewriter(int currentCount)
+    {
+        textComponent = m_TextMeshProUGUI[currentCount];
+
+        textComponent.ForceMeshUpdate();
+
+        textComponent.maxVisibleCharacters = 0;
+        int totalCharacter = textComponent.textInfo.characterCount;
 
         for (int i = 0; i <= totalCharacter; i++)
         {
-            m_TextMeshProUGUI.maxVisibleCharacters = i;
+            textComponent.maxVisibleCharacters = i;
             yield return new WaitForSeconds(Characterspacing);
         }
-
-        m_TextMeshProUGUI.maxVisibleCharacters = totalCharacter;
+        textComponent.maxVisibleCharacters = totalCharacter;
         typewriterCoroutine = null;
-
-        // 待機
         yield return new WaitForSeconds(0.1f);
         OnStringChange();
     }
 }
+

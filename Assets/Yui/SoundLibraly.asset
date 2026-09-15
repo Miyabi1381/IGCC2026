@@ -16,3 +16,6 @@ MonoBehaviour:
   - id: TitleBGM
     clip: {fileID: 8300000, guid: ea3dcbb4947c51548bf3ccc65cc13c93, type: 3}
     volumeScale: 1
+  - id: TitleBGM
+    clip: {fileID: 8300000, guid: ea3dcbb4947c51548bf3ccc65cc13c93, type: 3}
+    volumeScale: 1

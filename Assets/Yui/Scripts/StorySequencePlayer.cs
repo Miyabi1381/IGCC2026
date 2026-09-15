@@ -14,8 +14,11 @@ public class StorySequencePlayer : MonoBehaviour
         [Tooltip("LocalizedTextTableに登録済みのkey")]
         public string Key;
 
-        [Tooltip("Optional — leave empty to keep showing whatever image was displayed on the previous line")]
+        [Tooltip("leave empty to keep showing whatever image was displayed on the previous line")]
         public Sprite Image;
+
+        [Tooltip("Seconds to wait on this line before auto-advancing. Leave at -1 to use the default delay below.")]
+        public float AutoAdvanceDelay = -1f;
     }
 
     [Header("Display")]
@@ -30,6 +33,11 @@ public class StorySequencePlayer : MonoBehaviour
     [SerializeField] private bool useTypewriterEffect = true;
     [SerializeField] private float charactersPerSecond = 30f;
 
+    [Header("Auto Advance")]
+    [Tooltip("If enabled, lines advance automatically after their delay instead of waiting for player input. The player can still press advance to skip ahead early.")]
+    [SerializeField] private bool useAutoAdvance = false;
+    [SerializeField] private float defaultAutoAdvanceDelay = 2f;
+
     [Header("Input")]
     [SerializeField] private InputActionReference advanceActionReference;
 
@@ -40,6 +48,7 @@ public class StorySequencePlayer : MonoBehaviour
     private int currentIndex = -1;
     private bool isTyping = false;
     private Coroutine typeRoutine;
+    private Coroutine autoAdvanceRoutine;
     private string currentFullText = "";
 
     public StoryLine[] StoryLines { get => storyLines; set => storyLines = value; }
@@ -111,6 +120,8 @@ public class StorySequencePlayer : MonoBehaviour
 
     private void ShowNextLine()
     {
+        CancelAutoAdvance(); // stop any pending timer for the line we're leaving, manual or otherwise
+
         currentIndex++;
 
         if (currentIndex >= StoryLines.Length)
@@ -152,6 +163,7 @@ public class StorySequencePlayer : MonoBehaviour
         else
         {
             displayText.text = currentFullText;
+            TryStartAutoAdvance(); // text shown instantly, so schedule the auto-advance timer right away
         }
     }
 
@@ -170,6 +182,8 @@ public class StorySequencePlayer : MonoBehaviour
 
         isTyping = false;
         typeRoutine = null;
+
+        TryStartAutoAdvance(); // typewriter finished naturally — start the auto-advance clock now
     }
 
     private void SkipTypewriter()
@@ -182,6 +196,45 @@ public class StorySequencePlayer : MonoBehaviour
 
         displayText.text = currentFullText;
         isTyping = false;
+
+        TryStartAutoAdvance(); // player skipped ahead to full text — auto-advance timer starts from here instead
+    }
+
+    // Starts the auto-advance countdown for whatever line is currently displayed, if enabled.
+    private void TryStartAutoAdvance()
+    {
+        if (!useAutoAdvance) return;
+
+        CancelAutoAdvance(); // just in case one was already pending, shouldn't normally happen
+        float delay = GetCurrentLineDelay();
+        autoAdvanceRoutine = StartCoroutine(AutoAdvanceRoutine(delay));
+    }
+
+    private float GetCurrentLineDelay()
+    {
+        if (currentIndex >= 0 && currentIndex < StoryLines.Length)
+        {
+            float lineDelay = StoryLines[currentIndex].AutoAdvanceDelay;
+            if (lineDelay >= 0f) return lineDelay; // per-line override takes priority
+        }
+
+        return defaultAutoAdvanceDelay;
+    }
+
+    private IEnumerator AutoAdvanceRoutine(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        autoAdvanceRoutine = null;
+        ShowNextLine();
+    }
+
+    private void CancelAutoAdvance()
+    {
+        if (autoAdvanceRoutine != null)
+        {
+            StopCoroutine(autoAdvanceRoutine);
+            autoAdvanceRoutine = null;
+        }
     }
 
     // 再生中に言語が切り替わった場合、今表示中の行を新しい言語で出し直す。

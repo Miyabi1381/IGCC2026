@@ -567,15 +567,24 @@ MonoBehaviour:
   storyImageDisplay: {fileID: 632761573}
   storyLines:
   - Key: story_1
-    Image: {fileID: 5919990933074269837, guid: 4effc683a1171ac4cb6e18fde6ca3ecc, type: 3}
+    Image: {fileID: 6755275329096795002, guid: b3cff91e68f20ae40bb91bf7660c7ac2, type: 3}
+    AutoAdvanceDelay: -1
   - Key: story_2
-    Image: {fileID: -4008665456646069722, guid: f3155d0d19f1f4d4bb0193f7d0e77ad4, type: 3}
+    Image: {fileID: 5919990933074269837, guid: 4effc683a1171ac4cb6e18fde6ca3ecc, type: 3}
+    AutoAdvanceDelay: -1
   - Key: story_3
-    Image: {fileID: 0}
+    Image: {fileID: -4008665456646069722, guid: f3155d0d19f1f4d4bb0193f7d0e77ad4, type: 3}
+    AutoAdvanceDelay: -1
   - Key: story_4
     Image: {fileID: 0}
+    AutoAdvanceDelay: -1
+  - Key: story_5
+    Image: {fileID: 0}
+    AutoAdvanceDelay: -1
   useTypewriterEffect: 1
   charactersPerSecond: 10
+  useAutoAdvance: 1
+  defaultAutoAdvanceDelay: 2
   advanceActionReference: {fileID: 0}
   onStoryComplete:
     m_PersistentCalls:
@@ -614,8 +623,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6160c624075eb5c41b181457c57fe2bf, type: 2}
+  m_sharedMaterial: {fileID: 3408310012241679897, guid: 6160c624075eb5c41b181457c57fe2bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -639,8 +648,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

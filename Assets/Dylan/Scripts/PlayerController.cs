@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     private Sprite skeletonSprite;   // assigned per-spawn by DeathManager, matching this variant
     private bool isDead = false;
 
+    [Header("--- DEBUG ---")]
+    public bool DebugKillKey = true; // toggle off before a real build
+
     [Header("--- ANIMATION ---")]
     private Animator PlayerAnim;
     public Sprite BodySprite;
@@ -67,6 +70,13 @@ public class PlayerController : MonoBehaviour
     public Color SingleJumpUsedTint = new Color(0.85f, 0.7f, 1f, 1f);  // light purple after the first jump
     public Color DoubleJumpAvailableFlashColor = Color.white;          // peak color the flash oscillates toward
     public float DoubleJumpFlashSpeed = 6f;                            // higher = faster flicker
+
+    [Header("--- SOUND EFFECTS ---")]
+    public AudioClip JumpSFX;
+    public AudioClip DashSFX;
+    public AudioClip CheckpointFailSFX;
+    public AudioClip DeathSFX;
+    private AudioSource audioSource;
 
     // --- PRIVATE INTERNAL STATES ---
     private Rigidbody2D rb;
@@ -97,6 +107,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         PlayerAnim = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
         currentStamina = MaxClimbStamina;
 
         if (DeathManager.Instance != null)
@@ -122,6 +133,11 @@ public class PlayerController : MonoBehaviour
                 localScale.x *= -1f;
                 transform.localScale = localScale;
             }
+        }
+
+        if (DebugKillKey && Keyboard.current != null && Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            Die();
         }
     }
 
@@ -324,12 +340,18 @@ public class PlayerController : MonoBehaviour
             isDoubleJump = false;
             coyoteTimer = 0f;
             jumpBufferTimer = 0f;
+
+            if (audioSource != null && JumpSFX != null)
+                audioSource.PlayOneShot(JumpSFX);
         }
         else if (!isGrounded && !isDoubleJump && !isTouchingWall && HasDoubleJumpUnlocked)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
             isDoubleJump = true;
             jumpBufferTimer = 0f;
+
+            if (audioSource != null && JumpSFX != null)
+                audioSource.PlayOneShot(JumpSFX);
         }
     }
 
@@ -356,6 +378,9 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = new Vector2(pushDirection * WallJumpForce.x, WallJumpForce.y);
                 wallJumpLockTimer = WallJumpLockTime;
                 holdClimbInput = false; // force-release hold so isClimbing doesn't re-trigger and cancel the jump
+
+                if (audioSource != null && JumpSFX != null)
+                    audioSource.PlayOneShot(JumpSFX);
 
                 IsFacingRight = !IsFacingRight;
                 Vector3 localScale = transform.localScale;
@@ -391,7 +416,9 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded)
         {
-            Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
+            Debug.Log("Cannot place a checkpoint — not standing on ground.");
+            if (audioSource != null && CheckpointFailSFX != null)
+                audioSource.PlayOneShot(CheckpointFailSFX);
             return;
         }
 
@@ -404,7 +431,25 @@ public class PlayerController : MonoBehaviour
             bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
             if (!onValidGround)
             {
-                Debug.Log("Cannot place a checkpoint on a corpse."); // TODO: feedback SFX/UI for invalid placement
+                Debug.Log("Cannot place a checkpoint on a corpse.");
+                if (audioSource != null && CheckpointFailSFX != null)
+                    audioSource.PlayOneShot(CheckpointFailSFX);
+                return;
+            }
+        }
+
+        int MinecartLayerIndex = LayerMask.NameToLayer("Minecart");
+        if(MinecartLayerIndex != -1)
+        {
+            LayerMask MinecartMask = 1 << MinecartLayerIndex;
+            LayerMask validGroundMask = GroundLayer & ~MinecartMask; // GroundLayer minus Minecart
+
+            bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
+            if (!onValidGround)
+            {
+                Debug.Log("Cannot place a checkpoint on a minecart.");
+                if (audioSource != null && CheckpointFailSFX != null)
+                    audioSource.PlayOneShot(CheckpointFailSFX);
                 return;
             }
         }
@@ -417,6 +462,9 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+
+        if (audioSource != null && DashSFX != null)
+            audioSource.PlayOneShot(DashSFX);
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -505,6 +553,9 @@ public class PlayerController : MonoBehaviour
         if (spriteRenderer != null && deathPoseSprite != null)
             spriteRenderer.sprite = deathPoseSprite;
 
+        if (DeathSFX != null)
+            AudioSource.PlayClipAtPoint(DeathSFX, transform.position); // independent of this object's own AudioSource/enabled state
+
         // Put the corpse on its own layer so it's treated as standable/climbable —
         // works automatically as long as "Corpse" is checked in GroundLayer/WallLayer in the Inspector.
         int corpseLayer = LayerMask.NameToLayer("Corpse");
@@ -525,13 +576,5 @@ public class PlayerController : MonoBehaviour
 
         if (spriteRenderer != null && skeletonSprite != null)
             spriteRenderer.sprite = skeletonSprite;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        if (GroundCheck != null) Gizmos.DrawWireCube(GroundCheck.position, groundCheckSize);
-        Gizmos.color = Color.blue;
-        if (WallCheck != null) Gizmos.DrawWireCube(WallCheck.position, wallCheckSize);
     }
 }

@@ -39,14 +39,14 @@ public class DeathManager : MonoBehaviour
     public CinemachineCamera GameCamera;
 
     [Header("--- STAMINA UI ---")]
-    public StaminaBarFollow StaminaBarPosition; 
-    public StaminaBarUI StaminaBarDisplay;   
+    public StaminaBarFollow StaminaBarPosition; // drag the Canvas (or bar object) holding StaminaBarFollow.cs here
+    public StaminaBarUI StaminaBarDisplay;      // drag the StaminaBar object holding StaminaBarUI.cs here
 
     [Header("--- CORPSE CLEANUP ---")]
     public int MaxCorpses = 10; // total corpses allowed in the scene (active + retired); oldest is deleted past this
 
     [Header("--- ABILITY UNLOCKS (persist across every future spawn) ---")]
-    public bool DoubleJumpUnlocked = false;
+    public bool DoubleJumpUnlocked = false; // lives here, not on PlayerController, so it survives Destroy
 
     [Header("--- OFFERINGS ---")]
     public int CurrentOfferings = 0;       // what the current player is carrying right now
@@ -197,9 +197,24 @@ public class DeathManager : MonoBehaviour
 
         TrimOldestCorpses();
         DropOfferingsAtDeath(corpse.transform.position); // scatter carried offerings at the death spot
+        ResetLevelHazards(); // NEW — put drop objects, minecarts, etc. back to their starting state for the next life
 
         deathCount++;
         SpawnNextPlayer();
+    }
+
+    // Finds every instance of the relevant hazard types currently in the scene and resets each
+    // one — so every death cleanly restores the level's dynamic obstacles for the next spawn,
+    // rather than leaving them wherever they ended up from the previous attempt.
+    private void ResetLevelHazards()
+    {
+        DropObject[] dropObjects = FindObjectsByType<DropObject>(FindObjectsSortMode.None);
+        foreach (DropObject dropObject in dropObjects)
+            dropObject.ResetDropObject();
+
+        Minecart[] minecarts = FindObjectsByType<Minecart>(FindObjectsSortMode.None);
+        foreach (Minecart minecart in minecarts)
+            minecart.ResetMinecart();
     }
 
     // Deletes the oldest corpses once the total exceeds MaxCorpses, keeping the scene from

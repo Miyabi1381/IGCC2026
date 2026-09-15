@@ -23,7 +23,7 @@ public class Command : MonoBehaviour
     void Update()
     {
         currentState = titleCommandManager.SetCurrentCommand();
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             active = true;
         }

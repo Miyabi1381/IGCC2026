@@ -47,10 +47,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    private void Start()
-    {
-        SoundManager.Instance.PlayBGM("Gameplay");
-    }
     private void OnDestroy()
     {
         if (Instance == this)

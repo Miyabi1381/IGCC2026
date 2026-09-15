@@ -32,6 +32,9 @@ MonoBehaviour:
     japanese: "\u9589\u3058\u308B"
     english: close
   - key: story_1
+    japanese: 
+    english: 
+  - key: story_2
     japanese: "\u306F\u308B\u304B\u6614\u3001\u4E16\u754C\u306F\u5929\u7167\u5927\u5FA1\u795E\u306B\u3088\u308A\u592A\u967D\u306E\u5149\u306B\u5305\u307E\u308C\u3066\u3044\u307E\u3057\u305F\u3002\r\n\r\n\u3057\u304B\u3057\u3001\u5F1F\u306E\u30B9\u30B5\u30CE\u30AA\u306E\u4E71\u66B4\u306A\u884C\u3044\u306E\u305B\u3044\u3067\u592A\u967D\u306E\u5973\u795E\u3067\u3042\u308B\u5929\u7167\u5927\u5FA1\u795E\u306F\u3001\u8056\u306A\u308B\u6D1E\u7A9F\u300C\u5929\u5CA9\u6238\u300D\u306B\u8EAB\u3092\u96A0\u3057\u3066\u3057\u307E\u3044\u307E\u3057\u305F\u3002"
     english: 'Long ago, the world was bathed in sunlight.
 
@@ -39,26 +42,28 @@ MonoBehaviour:
       But after the reckless
       deeds of her brother, Susanoo, Amaterasu, goddess of the sun, withdrew into
       the sacred cave of Amano-Iwato.'
-  - key: story_2
+  - key: story_3
     japanese: "\u5929\u7167\u5927\u5FA1\u795E\u304C\u3044\u306A\u304F\u306A\u3063\u305F\u3053\u3068\u3067\u3001\u4E16\u754C\u306F\u95C7\u306B\u5305\u307E\u308C\u307E\u3057\u305F\u3002"
     english: With her gone, darkness spread across the world.
-  - key: story_3
-    japanese: "\u3069\u308C\u3060\u3051\u306E\u6B73\u6708\u304C\u6D41\u308C\u3066\u3082\u3001\u95C7\u304C\u6674\u308C\u308B\u3053\u3068\u306F\u3042\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002\r\n\r\n\u5149\u3092\u53D6\u308A\u623B\u3059\u305F\u3081\u3001\u52C7\u6562\u306A\u5192\u967A\u8005\u305F\u3061\u306F\u5929\u7167\u5927\u5FA1\u795E\u3092\u63A2\u3057\u6C42\u3081\u3066\u5929\u5CA9\u6238\u3078\u3068\u8DB3\u3092\u8E0F\u307F\u5165\u308C\u305F\u3002"
+  - key: story_4
+    japanese: "\u3069\u308C\u3060\u3051\u306E\u6B73\u6708\u304C\u6D41\u308C\u3066\u3082\u3001\u95C7\u304C\u6674\u308C\u308B\u3053\u3068\u306F\u3042\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002"
     english: 'Years passed, and the darkness remained.
 
+      
 
-
-      Desperate to restore
-      the light, brave adventurers ventured into Amano-Iwato in search of the goddess.'
-  - key: story_4
-    japanese: "\u5F7C\u3089\u306E\u9858\u3044\u306F\u4E00\u3064\u3001\u5929\u7167\u5927\u5FA1\u795E\u307E\u3067\u305F\u3069\u308A\u7740\u304D\u3001\u4E16\u754C\u3092\u95C7\u304B\u3089\u53D6\u308A\u623B\u3059\u3053\u3068\u3002 "
+      Desperate
+      to restore the light, brave adventurers ventured into Amano-Iwato in search
+      of the goddess. '
+  - key: story_5
+    japanese: "\u5149\u3092\u53D6\u308A\u623B\u3059\u305F\u3081\u3001\u52C7\u6562\u306A\u5192\u967A\u8005\u305F\u3061\u306F\u5929\u7167\u5927\u5FA1\u795E\u3092\u63A2\u3057\u6C42\u3081\u3066\u5929\u5CA9\u6238\u3078\u3068\u8DB3\u3092\u8E0F\u307F\u5165\u308C\u305F\u3002\r\n\r\n\u5F7C\u3089\u306E\u9858\u3044\u306F\u4E00\u3064\u3001\u5929\u7167\u5927\u5FA1\u795E\u307E\u3067\u305F\u3069\u308A\u7740\u304D\u3001\u4E16\u754C\u3092\u95C7\u304B\u3089\u53D6\u308A\u623B\u3059\u3053\u3068\u3002"
     english: 'Deep within the cave, they discovered ancient offerings left behind
       by those who came before them.
 
+      
 
-
-      They gathered the offerings and ventured
-      deeper, hoping to reach Amaterasu and bring the light back to the world. '
+      They gathered the offerings
+      and ventured deeper, hoping to reach Amaterasu and bring the light back to
+      the world. '
   - key: play_move
     japanese: "\u79FB\u52D5"
     english: Move
@@ -80,26 +85,26 @@ MonoBehaviour:
       reaches Amaterasu. She emerges from the cave, restoring her light to the world
       and banishing the darkness that had consumed it.
 
-      
 
-      The world
-      is saved. Many were lost along the way, but their sacrifices were not in vain.
-      For the surviving members of your team, this is an ending they can accept.'
+
+      The world is saved.
+      Many were lost along the way, but their sacrifices were not in vain. For the
+      surviving members of your team, this is an ending they can accept.'
   - key: BadEnding_1
-    japanese: "\u3042\u306A\u305F\u306E\u60B2\u9858\u306F\u53F6\u308F\u305A\u3001\u30A2\u30DE\u30C6\u30E9\u30B9\u306F\u6C88\u9ED9\u3057\u305F\u307E\u307E\u3067\u3059\u3002\u795E\u306F\u6D1E\u7A9F\u304B\u3089\u59FF\u3092\u73FE\u3055\u305A\u3001\u4E16\u754C\u306F\u4F9D\u7136\u3068\u3057\u3066\u95C7\u306B\u5305\u307E\u308C\u3066\u3044\u307E\u3059\u3002\r\n\r\n\u5012\u308C\u305F\u4EF2\u9593\u305F\u3061\u306E\u72A0\u7272\u304C\u5831\u308F\u308C\u308B\u3053\u3068\u306F\u306A\u304F\u3001\u3053\u308C\u307E\u3067\u96C6\u3081\u305F\u4F9B\u7269\u3082\u795E\u306B\u9858\u3044\u3092\u5C4A\u3051\u308B\u306B\u306F\u4E0D\u5341\u5206\u3067\u3057\u305F\u3002"
+    japanese: "\u3042\u306A\u305F\u306E\u60B2\u9858\u306F\u304B\u306A\u308F\u305A\u3001\u30A2\u30DE\u30C6\u30E9\u30B9\u306F\u6C88\u9ED9\u3057\u305F\u307E\u307E\u3067\u3059\u3002\u795E\u306F\u6D1E\u7A9F\u304B\u3089\u59FF\u3092\u73FE\u3055\u305A\u3001\u4E16\u754C\u306F\u4F9D\u7136\u3068\u3057\u3066\u95C7\u306B\u5305\u307E\u308C\u3066\u3044\u307E\u3059\u3002\r\n\r\n\u5012\u308C\u305F\u4EF2\u9593\u305F\u3061\u306E\u72A0\u7272\u304C\u5831\u308F\u308C\u308B\u3053\u3068\u306F\u306A\u304F\u3001\u3053\u308C\u307E\u3067\u96C6\u3081\u305F\u4F9B\u7269\u3082\u795E\u306B\u9858\u3044\u3092\u5C4A\u3051\u308B\u306B\u306F\u4E0D\u5341\u5206\u3067\u3057\u305F\u3002"
     english: 'Despite your pleas, Amaterasu remains silent. She does not emerge from
       the cave, and the world is still shrouded in darkness.
 
-      
 
-      The
-      sacrifices of your fallen teammates have been forgotten, and the offerings
-      you gathered were not enough to reach her.'
+
+      The sacrifices
+      of your fallen teammates have been forgotten, and the offerings you gathered
+      were not enough to reach her.'
   - key: BadEnding_2
     japanese: "\u3057\u304B\u3057\u3001\u6D1E\u7A9F\u306E\u5965\u6DF1\u304F\u3067\u3001\u30A2\u30DE\u30C6\u30E9\u30B9\u306F\u4ECA\u3082\u5F85\u3061\u7D9A\u3051\u3066\u3044\u307E\u3059\u3002\u3082\u3057\u304B\u3059\u308B\u3068\u3001\u3082\u3063\u3068\u591A\u304F\u306E\u4F9B\u7269\u3092\u6367\u3052\u308C\u3070\u3001\u795E\u306F\u3042\u306A\u305F\u306E\u9858\u3044\u3092\u805E\u304D\u5165\u308C\u3066\u304F\u308C\u308B\u304B\u3082\u3057\u308C\u307E\u305B\u3093\u3002"
     english: 'Yet deep within the cave, Amaterasu still awaits. Perhaps, with more
       offerings, she may finally hear your plea.
 
-      
+
 
       Let''s try again.'

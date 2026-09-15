@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OfferingPickup
   SpriteRenderer: {fileID: 3736540158575777303}
+  PickupSFX: {fileID: 8300000, guid: ac7ae9eb860399c42879ddcea23924b6, type: 3}

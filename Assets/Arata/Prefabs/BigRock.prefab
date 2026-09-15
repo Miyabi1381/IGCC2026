@@ -142,7 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   aliveScriptName: PlayerController
-  lifetime: 8
+  lifetime: 10
 --- !u!58 &4845815458652299725
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,19 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-
 public class StorySequencePlayer : MonoBehaviour
 {
+    [System.Serializable]
+    public class StoryLine
+    {
+        [Tooltip("LocalizedTextTableã«ç™»éŒ²æ¸ˆã¿ã®key")]
+        public string Key;
+
+        [Tooltip("Optional â€” leave empty to keep showing whatever image was displayed on the previous line")]
+        public Sprite Image;
+    }
+
     [Header("Display")]
     [SerializeField] private TMP_Text displayText;
+    [SerializeField] private Image storyImageDisplay; // the illustration/cutscene image shown alongside the text
 
     [Header("Story Content")]
-    [Tooltip("LocalizedTextTable??????key?????????????")]
-    [SerializeField] private string[] storyKeys;
+    [Tooltip("Each entry is a LocalizedTextTable key, with an optional image to switch to when that line is shown")]
+    [SerializeField] private StoryLine[] storyLines;
 
     [Header("Typewriter Effect")]
     [SerializeField] private bool useTypewriterEffect = true;
@@ -31,7 +42,7 @@ public class StorySequencePlayer : MonoBehaviour
     private Coroutine typeRoutine;
     private string currentFullText = "";
 
-    public string[] StoryKeys { get => storyKeys; set => storyKeys = value; }
+    public StoryLine[] StoryLines { get => storyLines; set => storyLines = value; }
 
     private void Awake()
     {
@@ -89,7 +100,7 @@ public class StorySequencePlayer : MonoBehaviour
     {
         if (isTyping)
         {
-            // ƒ^ƒCƒv’†‚É‰Ÿ‚³‚ê‚½‚çA‰‰o‚ð”ò‚Î‚µ‚Ä‘S•¶‚ð‘¦•\Ž¦‚·‚é
+            // ã‚¿ã‚¤ãƒ—ä¸­ã«æŠ¼ã•ã‚ŒãŸã‚‰ã€æ¼”å‡ºã‚’é£›ã°ã—ã¦å…¨æ–‡ã‚’å³è¡¨ç¤ºã™ã‚‹
             SkipTypewriter();
         }
         else
@@ -102,7 +113,7 @@ public class StorySequencePlayer : MonoBehaviour
     {
         currentIndex++;
 
-        if (currentIndex >= StoryKeys.Length)
+        if (currentIndex >= StoryLines.Length)
         {
             onStoryComplete?.Invoke();
             return;
@@ -119,8 +130,15 @@ public class StorySequencePlayer : MonoBehaviour
             return;
         }
 
-        string key = StoryKeys[currentIndex];
-        currentFullText = LanguageManager.Instance.GetText(key);
+        StoryLine line = StoryLines[currentIndex];
+        currentFullText = LanguageManager.Instance.GetText(line.Key);
+
+        // Only swap the image if this line has one assigned â€” leaving it null lets several
+        // consecutive lines share the same illustration before the next explicit image change.
+        if (storyImageDisplay != null && line.Image != null)
+        {
+            storyImageDisplay.sprite = line.Image;
+        }
 
         if (typeRoutine != null)
         {
@@ -166,10 +184,10 @@ public class StorySequencePlayer : MonoBehaviour
         isTyping = false;
     }
 
-    // Ä¶’†‚ÉŒ¾Œê‚ªØ‚è‘Ö‚í‚Á‚½ê‡A¡•\Ž¦’†‚Ìs‚ðV‚µ‚¢Œ¾Œê‚Åo‚µ’¼‚·B
+    // å†ç”Ÿä¸­ã«è¨€èªžãŒåˆ‡ã‚Šæ›¿ã‚ã£ãŸå ´åˆã€ä»Šè¡¨ç¤ºä¸­ã®è¡Œã‚’æ–°ã—ã„è¨€èªžã§å‡ºã—ç›´ã™ã€‚
     private void HandleLanguageChanged(Language language)
     {
-        if (currentIndex >= 0 && currentIndex < StoryKeys.Length)
+        if (currentIndex >= 0 && currentIndex < StoryLines.Length)
         {
             DisplayCurrentLine();
         }

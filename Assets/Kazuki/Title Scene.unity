@@ -1929,7 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageManager
   textTable: {fileID: 11400000, guid: 48bd2961422ce97449b8511fe5bc9780, type: 2}
-  defaultLanguage: 1
+  defaultLanguage: 0
 --- !u!4 &2012645371
 Transform:
   m_ObjectHideFlags: 0

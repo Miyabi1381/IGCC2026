@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f7a18100afeed9f46a5dee0448bc5bce
+guid: 18b0b459522d06c448900bb6ffe8c9d7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4318372288574258490
-    second: "\u30EC\u30A4\u30E4\u30FC 51_0"
+      213: -4008665456646069722
+    second: Cutscene 1-4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u30EC\u30A4\u30E4\u30FC 51_0"
+      name: Cutscene 1-4_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 1
-        width: 26
-        height: 30
+        x: 0
+        y: 0
+        width: 320
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3dfb5c77b0fdeb30800000000000000
-      internalID: 4318372288574258490
+      spriteID: 6226b39810c5e58c0800000000000000
+      internalID: -4008665456646069722
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u30EC\u30A4\u30E4\u30FC 51_0": 4318372288574258490
+      Cutscene 1-4_0: -4008665456646069722
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

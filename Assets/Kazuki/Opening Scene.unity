@@ -705,10 +705,10 @@ MonoBehaviour:
     Image: {fileID: -4008665456646069722, guid: f3155d0d19f1f4d4bb0193f7d0e77ad4, type: 3}
     AutoAdvanceDelay: -1
   - Key: story_4
-    Image: {fileID: 0}
+    Image: {fileID: -6360116305524664329, guid: cd008ae97fabead42875844a870990ce, type: 3}
     AutoAdvanceDelay: -1
   - Key: story_5
-    Image: {fileID: 0}
+    Image: {fileID: 5858479730459764560, guid: f0a64328c273bb443927d0acd76bd2cb, type: 3}
     AutoAdvanceDelay: -1
   useTypewriterEffect: 1
   charactersPerSecond: 10

@@ -739,10 +739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StorySequencePlayer
   displayText: {fileID: 2053530166}
-  storyImageDisplay: {fileID: 0}
+  storyImageDisplay: {fileID: 1766601998}
   storyLines:
   - Key: BadEnding_1
-    Image: {fileID: 0}
+    Image: {fileID: -3201672243932066870, guid: 07bf06e06222c7f4d942b2fea349901d, type: 3}
     AutoAdvanceDelay: -1
   useTypewriterEffect: 1
   charactersPerSecond: 10

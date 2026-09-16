@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEditor.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
     private bool holdClimbInput;
     private bool isDashing;
     private bool canDash = true;
+    private Coroutine dashCoroutine;
 
     // --- PUBLIC ACCESSORS (for UI / external systems) ---
     public float StaminaPercent => currentStamina / MaxClimbStamina;
@@ -401,7 +403,7 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed && canDash && !isDashing && !isClimbing)
         {
-            StartCoroutine(PerformCelesteDash());
+            dashCoroutine = StartCoroutine(PerformCelesteDash());
         }
     }
 
@@ -416,7 +418,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded)
         {
-            Debug.Log("Cannot place a checkpoint — not standing on ground.");
+            Debug.Log("Cannot place a checkpoint — not standing on ground."); // TODO: feedback SFX/UI for invalid placement
             if (audioSource != null && CheckpointFailSFX != null)
                 audioSource.PlayOneShot(CheckpointFailSFX);
             return;
@@ -431,7 +433,7 @@ public class PlayerController : MonoBehaviour
             bool onValidGround = Physics2D.OverlapBox(GroundCheck.position, groundCheckSize, 0f, validGroundMask);
             if (!onValidGround)
             {
-                Debug.Log("Cannot place a checkpoint on a corpse.");
+                Debug.Log("Cannot place a checkpoint on a corpse."); // TODO: feedback SFX/UI for invalid placement
                 if (audioSource != null && CheckpointFailSFX != null)
                     audioSource.PlayOneShot(CheckpointFailSFX);
                 return;
@@ -439,7 +441,7 @@ public class PlayerController : MonoBehaviour
         }
 
         int MinecartLayerIndex = LayerMask.NameToLayer("Minecart");
-        if(MinecartLayerIndex != -1)
+        if (MinecartLayerIndex != -1)
         {
             LayerMask MinecartMask = 1 << MinecartLayerIndex;
             LayerMask validGroundMask = GroundLayer & ~MinecartMask; // GroundLayer minus Minecart
@@ -486,9 +488,15 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(DashTime);
 
+        // Defensive safety net — if the player died mid-dash and this coroutine somehow still
+        // resumed (StopCoroutine in Die() should normally prevent this), bail out here instead
+        // of touching a Rigidbody2D that's already been made static by Die().
+        if (isDead) yield break;
+
         rb.gravityScale = originalGravity;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, rb.linearVelocity.y * 0.5f);
         isDashing = false;
+        dashCoroutine = null;
         // canDash re-enables only via the landing edge check in CheckGrounded() — matches double jump behavior
     }
 
@@ -540,6 +548,26 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        // Stop the dash coroutine explicitly — disabling this component does NOT stop an
+        // already-running coroutine on its own, so without this, a dash in progress at the
+        // moment of death would later try to set velocity on this now-static Rigidbody2D,
+        // throwing an error and leaving isDashing/gravityScale stuck in a bad state.
+        if (dashCoroutine != null)
+        {
+            StopCoroutine(dashCoroutine);
+            dashCoroutine = null;
+        }
+        isDashing = false;
+        rb.gravityScale = DefaultGravityScale; // restore in case the dash had zeroed it out
+
+        // Explicitly disable the Animator too — disabling PlayerController does NOT disable
+        // other components on the same object. If death happens while walking (the one state
+        // where the Animator is left enabled to drive the walk cycle), it would otherwise keep
+        // running on its own and overwrite the death pose sprite back to a walk-cycle frame
+        // on the very next frame.
+        if (PlayerAnim != null)
+            PlayerAnim.enabled = false;
+
         this.enabled = false; // stop all PlayerController logic (Update/FixedUpdate no longer run)
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static; // stays solid — this becomes the new ACTIVE corpse
@@ -563,6 +591,17 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = corpseLayer;
         else
             Debug.LogWarning("PlayerController: No layer named 'Corpse' found. Add one in Project Settings > Tags and Layers.");
+
+        // Also tag it, so other systems (e.g. checkpoint placement, hazard scripts) can identify
+        // a corpse by tag rather than layer if that's more convenient for them.
+        try
+        {
+            gameObject.tag = "Corpse";
+        }
+        catch (UnityException)
+        {
+            Debug.LogWarning("PlayerController: No tag named 'Corpse' found. Add one in Project Settings > Tags and Layers.");
+        }
 
         if (DeathManager.Instance != null)
             DeathManager.Instance.PlayerDied(gameObject);

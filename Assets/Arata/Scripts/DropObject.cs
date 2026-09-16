@@ -13,6 +13,7 @@ public class DropObject : MonoBehaviour
     private bool isTriggered = false;
     private bool hasStopped = false;
     private Vector3 originalPos;
+    private Coroutine dropRoutine; // NEW — tracked so it can be explicitly stopped on reset
 
     void Start()
     {
@@ -29,13 +30,14 @@ public class DropObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // プレイヤーが検出されたが、ドロップシーケンスがトリガーされていない場合
         if (other.gameObject.CompareTag("Player") && !isTriggered)
         {
-            // 重複判定を防ぐため、触れた瞬間にフラグを立てる
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null && player.IsInSpawnGrace) return; // freshly spawned — don't trigger
+
             isTriggered = true;
-            hasStopped = false; // フラグをリセット
-            StartCoroutine(DropSequence());
+            hasStopped = false;
+            dropRoutine = StartCoroutine(DropSequence());
         }
     }
 
@@ -86,6 +88,8 @@ public class DropObject : MonoBehaviour
         {
             StopAndDeactivate();
         }
+
+        dropRoutine = null; // NEW — sequence finished naturally, nothing left to track/stop
     }
 
     // 停止と子オブジェクトの無効化処理
@@ -124,8 +128,17 @@ public class DropObject : MonoBehaviour
     // Reset processing
     public void ResetDropObject()
     {
+        // Explicitly stop the drop sequence if it's still running — resetting fields alone
+        // doesn't halt an already-running coroutine, which could otherwise still be mid-shake
+        // or mid-fall and interfere with the reset state on its next resumed frame.
+        if (dropRoutine != null)
+        {
+            StopCoroutine(dropRoutine);
+            dropRoutine = null;
+        }
+
         isTriggered = false;
-        hasStopped = false; 
+        hasStopped = false;
 
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0f;

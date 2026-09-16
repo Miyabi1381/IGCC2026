@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
   entries:
   - id: TitleBGM
-    clip: {fileID: 8300000, guid: ea3dcbb4947c51548bf3ccc65cc13c93, type: 3}
+    clip: {fileID: 8300000, guid: e3620089ce2105e41b6c771b7819784b, type: 3}
+    volumeScale: 1
+  - id: GameplayBGM
+    clip: {fileID: 8300000, guid: ad9fb8910bc0bfb45853f3e30e188d03, type: 3}
+    volumeScale: 1
+  - id: OpeningBGM
+    clip: {fileID: 8300000, guid: dad2356f37ece5a429d8657ae05b9ad0, type: 3}
+    volumeScale: 1
+  - id: GoodEndingBGM
+    clip: {fileID: 8300000, guid: dad2356f37ece5a429d8657ae05b9ad0, type: 3}
+    volumeScale: 1
+  - id: BadEndingBGM
+    clip: {fileID: 8300000, guid: b2c3116ba5c2f1441afdb20dfc587ee7, type: 3}
     volumeScale: 1
   - id: Gameplay
     clip: {fileID: 8300000, guid: ad9fb8910bc0bfb45853f3e30e188d03, type: 3}

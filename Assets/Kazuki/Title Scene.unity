@@ -344,6 +344,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &374065091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374065093}
+  - component: {fileID: 374065092}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &374065092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374065091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc69f6b4236bb30488fb17f0a8f7514f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  audioMixer: {fileID: 24100000, guid: bac831b3ed23b164cabbdbbe842b8a03, type: 2}
+  bgmGroup: {fileID: 8135025833413571537, guid: bac831b3ed23b164cabbdbbe842b8a03, type: 2}
+  seGroup: {fileID: -8709267119389116464, guid: bac831b3ed23b164cabbdbbe842b8a03, type: 2}
+  exposedBgmVolumeParam: BGMVolume
+  exposedSeVolumeParam: SEVolume
+  soundLibrary: {fileID: 11400000, guid: b4fd5c9e3abb02848933a5f98f142c88, type: 2}
+  defaultBgmFadeSeconds: 1
+  sePoolSize: 12
+  allowPoolGrowth: 1
+--- !u!4 &374065093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374065091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 875.3711, y: 0.00001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387820343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,3 +2086,4 @@ SceneRoots:
   - {fileID: 2012645371}
   - {fileID: 14032371}
   - {fileID: 1937777261}
+  - {fileID: 374065093}

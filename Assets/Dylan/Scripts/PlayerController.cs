@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour
     public float StaminaPercent => currentStamina / MaxClimbStamina;
     public bool IsClimbing => isClimbing;
     public bool IsGrounded => isGrounded; // used by checkpoint placement, so "connected to ground" means the same thing it means everywhere else
-
+    private float spawnGraceTimer = 0.3f;
+    public bool IsInSpawnGrace => spawnGraceTimer > 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
         PlayerAnim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
         currentStamina = MaxClimbStamina;
+        spawnGraceTimer = 0.3f;
 
         if (DeathManager.Instance != null)
             DeathManager.Instance.RegisterPlayer(gameObject); // safety net — DeathManager already registers this synchronously on spawn, but this covers cases where a player is placed manually in the scene
@@ -125,6 +127,9 @@ public class PlayerController : MonoBehaviour
         HandleJumpBuffer();
         HandleAnimationAndPoseState(); // drives Idle/Walk via Animator, and Jump/WallClimb via direct sprite override
         ApplyResourceTint(); // colors the sprite based on dash/jump resource usage
+
+        if (spawnGraceTimer > 0f)
+            spawnGraceTimer -= Time.deltaTime;
 
         if (!isDashing && !isClimbing)
         {
